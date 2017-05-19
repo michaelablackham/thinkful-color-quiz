@@ -1,0 +1,38 @@
+//homepage color changing background
+@keyframes colorchange
+{
+  0%   {background: $black-90;}
+  20%  {background: $blue-50;}
+  40%  {background: $yellow-50;}
+  60%  {background: $green-50;}
+  80%  {background: $red-50;}
+  100% {background: $black-90;}
+}
+
+@-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+{
+  0%   {background: $black-90;}
+  20%  {background: $blue-50;}
+  40%  {background: $yellow-50;}
+  60%  {background: $green-50;}
+  80%  {background: $red-50;}
+  100% {background: $black-90;}
+}
+
+//pulsing button
+@-webkit-keyframes pulse
+{
+  to {box-shadow: 0 0 0 25px rgba(0, 0, 0, 0);}
+}
+@-moz-keyframes pulse
+{
+  to {box-shadow: 0 0 0 25px rgba(0, 0, 0, 0);}
+}
+@-ms-keyframes pulse
+{
+  to {box-shadow: 0 0 0 25px rgba(0, 0, 0, 0);}
+}
+@keyframes pulse
+{
+  to {box-shadow: 0 0 0 25px rgba(0, 0, 0, 0);}
+}

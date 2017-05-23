@@ -105,7 +105,11 @@ ul {
     transition-duration: .1s;
     transition-property: all;
     transition-timing-function: ease-in-out; }
+    .options .options--input:hover {
+      border-width: 5px;
+      top: 2px; }
     .options .options--input.active {
+      border-width: 10px;
       top: 4px;
       height: 80px;
       width: 80px; }

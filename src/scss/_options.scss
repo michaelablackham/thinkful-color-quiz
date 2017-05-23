@@ -18,11 +18,11 @@
     transition-timing-function: ease-in-out;
 
     &:hover {
-      // border-width: 5px;
-      // top: 2px;
+      border-width: 5px;
+      top: 2px;
     }
     &.active {
-      // border-width: 10px;
+      border-width: 10px;
       top: 4px;
       height: 80px;
       width: 80px;

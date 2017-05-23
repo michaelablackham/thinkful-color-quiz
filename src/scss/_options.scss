@@ -1,0 +1,28 @@
+.options {
+  margin: 3em 0;
+  text-align: center;
+
+  .options--input {
+    background: blue;
+    border: 3px solid $white;
+    border-radius: 50%;
+    height: 70px;
+    margin: 0 10px;
+    width: 70px;
+    display: inline-block;
+
+    label {
+      text-indent: -9999px;
+      display: none;
+    }
+    input[type=radio] {
+      cursor: pointer;
+      width: 70px;
+      height: 70px;
+      background: red;
+      display: inline-block;
+      border:none;
+      opacity: 0;
+    }
+  }
+}

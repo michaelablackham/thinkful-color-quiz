@@ -7,17 +7,17 @@ var sass = require('gulp-sass')
 // - [x] gulp.dest
 // - [x] gulp.watch
 
-var conf = {
-  html: {
-    src: './src/html/*.html',
-    dest: './build'
-  }
-}
+// var conf = {
+//   html: {
+//     src: './src/html/*.html',
+//     dest: './build'
+//   }
+// }
 
 gulp.task('build', ['build:html', 'build:css', 'build:js']);
 
 gulp.task('build:html', function () {
-  gulp.src(conf.html.src)
+  gulp.src('./src/html/*.html')
     .pipe(gulp.dest('./build'))
 })
 
@@ -34,7 +34,7 @@ gulp.task('build:js', function () {
 
 gulp.task('watch', function () {
   gulp.watch([
-    conf.html.src,
+    './src/html/*.html',
     './src/scss/*.scss',
     './src/js/*.js',
   ], ['build']);

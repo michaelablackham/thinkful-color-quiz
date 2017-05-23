@@ -4,9 +4,13 @@
 }
 
 body {
+  background: $black-90;
   text-align: center;
-  animation: colorchange 25s infinite;
-  -webkit-animation: colorchange 25s infinite; /* Chrome and Safari */
+
+  &.home {
+    animation: colorchange 25s infinite;
+    -webkit-animation: colorchange 25s infinite; /* Chrome and Safari */
+  }
 }
 
 .body--decoration {
@@ -18,13 +22,71 @@ body {
   z-index: 1;
 }
 
+button {
+  color: $white;
+  cursor: pointer;
+  background: $button;
+  border: 0;
+  border-radius: 30px;
+  letter-spacing: .1em;
+  margin: 0 .5em;
+  padding: 1em 1.8em;
+  text-transform: uppercase;
+  font-weight: 900;
+
+  &.pulse-button {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    margin: 40px 0;
+    -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+
+    &:hover {
+        animation: none;
+    }
+  }
+  &.submit {
+    background: $button;
+  }
+
+  &.reset {
+    background: rgba(0,0,0,.3);
+  }
+}
+
 section {
   position: relative;
   z-index: 2;
   max-width: 900px;
   margin: auto;
+  // display: none;
+  align-content: center;
+  justify-content: center;
+
+  &#home {
+    display:block;
+  }
 }
 
-fieldset {
-  border: 0;
+ul {
+  clear: both;
+  margin: 0;
+  padding: 0;
+
+  li {
+    border-radius: 100%;
+    display: inline-block;
+    height: 40px;
+    margin: 0 3px;
+    width: 40px;
+  }
+}
+
+.flexbox {
+
+}
+
+.flexbox > span {
+  // width: 50%;
 }

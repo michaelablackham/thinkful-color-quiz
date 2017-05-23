@@ -3,10 +3,12 @@
   font-family: 'Lato', sans-serif; }
 
 body {
-  text-align: center;
-  animation: colorchange 25s infinite;
-  -webkit-animation: colorchange 25s infinite;
-  /* Chrome and Safari */ }
+  background: #232225;
+  text-align: center; }
+  body.home {
+    animation: colorchange 25s infinite;
+    -webkit-animation: colorchange 25s infinite;
+    /* Chrome and Safari */ }
 
 .body--decoration {
   position: absolute;
@@ -16,32 +18,90 @@ body {
   height: 100%;
   z-index: 1; }
 
+button {
+  color: #fff;
+  cursor: pointer;
+  background: #000;
+  border: 0;
+  border-radius: 30px;
+  letter-spacing: .1em;
+  margin: 0 .5em;
+  padding: 1em 1.8em;
+  text-transform: uppercase;
+  font-weight: 900; }
+  button.pulse-button {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    margin: 40px 0;
+    -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1); }
+    button.pulse-button:hover {
+      animation: none; }
+  button.submit {
+    background: #000; }
+  button.reset {
+    background: rgba(0, 0, 0, 0.3); }
+
 section {
   position: relative;
   z-index: 2;
   max-width: 900px;
-  margin: auto; }
+  margin: auto;
+  align-content: center;
+  justify-content: center; }
+  section#home {
+    display: block; }
 
-fieldset {
-  border: 0; }
+ul {
+  clear: both;
+  margin: 0;
+  padding: 0; }
+  ul li {
+    border-radius: 100%;
+    display: inline-block;
+    height: 40px;
+    margin: 0 3px;
+    width: 40px; }
+
+.options {
+  margin: 3em 0;
+  text-align: center; }
+  .options .options--input {
+    background: blue;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    height: 70px;
+    margin: 0 10px;
+    width: 70px;
+    display: inline-block; }
+    .options .options--input label {
+      text-indent: -9999px;
+      display: none; }
+    .options .options--input input[type=radio] {
+      cursor: pointer;
+      width: 70px;
+      height: 70px;
+      background: red;
+      display: inline-block;
+      border: none;
+      opacity: 0; }
 
 .pager {
+  display: none;
   position: fixed;
   bottom: 50px;
   right: 50px; }
-  .pager span {
-    display: inline-block;
-    border-radius: 100%;
-    height: 40px;
-    margin: 0 3px;
+  .pager ul {
+    display: inline-block; }
+  .pager li {
     position: relative;
-    width: 40px;
     background: rgba(0, 0, 0, 0.5); }
-    .pager span.correct {
+    .pager li.correct {
       background: #105610; }
-    .pager span.incorrect {
+    .pager li.incorrect {
       background: #8a0303; }
-    .pager span .fa {
+    .pager li .fa {
       color: #fff;
       position: absolute;
       font-size: 1.3em;
@@ -49,6 +109,30 @@ fieldset {
       width: 100%;
       text-align: center;
       top: 10px; }
+
+h1, h2, h3 {
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 900; }
+
+h1 {
+  font-size: 4em;
+  margin-bottom: .4em; }
+
+h2 {
+  font-size: 2em; }
+  h2.subtitle {
+    font-size: 1.5em;
+    font-weight: normal;
+    opacity: .5; }
+  h2 span {
+    opacity: .3; }
+
+h3 {
+  display: inline-block;
+  margin: 0 20px 0;
+  position: relative;
+  top: -10px; }
 
 @keyframes colorchange {
   0% {
@@ -93,54 +177,3 @@ fieldset {
 @keyframes pulse {
   to {
     box-shadow: 0 0 0 25px transparent; } }
-
-h1, h2, h3 {
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  font-weight: 900; }
-
-h1 {
-  font-size: 4em; }
-
-h2 {
-  font-size: 2em; }
-  h2 span {
-    opacity: .3; }
-
-h3 {
-  display: inline-block;
-  margin: 0 20px 0;
-  position: relative;
-  top: -10px; }
-
-button {
-  color: #fff;
-  cursor: pointer;
-  background: #000;
-  border: 0;
-  border-radius: 30px;
-  letter-spacing: .1em;
-  margin: 0 .5em;
-  padding: 1em 1.8em;
-  text-transform: uppercase;
-  font-weight: 900; }
-  button.pulse-button {
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
-    margin: 40px 0;
-    -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
-    -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
-    -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
-    animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1); }
-    button.pulse-button:hover {
-      animation: none; }
-  button.submit {
-    background: #000; }
-  button.reset {
-    background: rgba(0, 0, 0, 0.3); }
-
-.flexbox {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 600px;
-  align-content: center;
-  justify-content: space-between; }

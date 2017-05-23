@@ -1,0 +1,31 @@
+h1, h2, h3 {
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-weight: 900;
+}
+
+h1 {
+  font-size: 4em;
+  margin-bottom: .4em;
+}
+
+h2 {
+  font-size: 2em;
+
+  &.subtitle {
+    font-size: 1.5em;
+    font-weight: normal;
+    opacity: .5;
+  }
+
+  span {
+    opacity: .3;
+  }
+}
+
+h3 {
+  display: inline-block;
+  margin: 0 20px 0;
+  position: relative;
+  top: -10px;
+}

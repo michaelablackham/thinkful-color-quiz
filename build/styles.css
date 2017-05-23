@@ -95,10 +95,20 @@ ul {
     background: blue;
     border: 3px solid #fff;
     border-radius: 50%;
+    box-sizing: border-box;
     height: 70px;
     margin: 0 10px;
     width: 70px;
-    display: inline-block; }
+    display: inline-block;
+    position: relative;
+    transition-delay: 0;
+    transition-duration: .1s;
+    transition-property: all;
+    transition-timing-function: ease-in-out; }
+    .options .options--input.active {
+      top: 4px;
+      height: 80px;
+      width: 80px; }
     .options .options--input label {
       text-indent: -9999px;
       display: none; }
@@ -120,6 +130,10 @@ ul {
   .pager li {
     position: relative;
     background: rgba(0, 0, 0, 0.5); }
+    .pager li.current {
+      animation: currentQuestion 1s infinite;
+      -webkit-animation: currentQuestion 1s infinite;
+      /* Chrome and Safari */ }
     .pager li.correct {
       background: #105610; }
     .pager li.incorrect {
@@ -206,3 +220,19 @@ h3 {
 @keyframes pulse {
   to {
     box-shadow: 0 0 0 25px transparent; } }
+
+@keyframes currentQuestion {
+  0% {
+    background: rgba(250, 250, 250, 0.3); }
+  50% {
+    background: rgba(250, 250, 250, 0.6); }
+  100% {
+    background: rgba(250, 250, 250, 0.3); } }
+
+@-webkit-currentQuestion currentQuestion {
+  0% {
+    background: rgba(250, 250, 250, 0.3); }
+  50% {
+    background: rgba(250, 250, 250, 0.8); }
+  100% {
+    background: rgba(250, 250, 250, 0.3); } }

@@ -12,6 +12,11 @@
     position: relative;
     background: rgba(0,0,0,0.5);
 
+    &.current {
+      animation: currentQuestion 1s infinite;
+      -webkit-animation: currentQuestion 1s infinite; /* Chrome and Safari */
+    }
+
     &.correct {
       background: $green-40;
     }

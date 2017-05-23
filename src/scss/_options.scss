@@ -6,10 +6,27 @@
     background: blue;
     border: 3px solid $white;
     border-radius: 50%;
+    box-sizing: border-box;
     height: 70px;
     margin: 0 10px;
     width: 70px;
     display: inline-block;
+    position: relative;
+    transition-delay: 0;
+    transition-duration: .1s;
+    transition-property: all;
+    transition-timing-function: ease-in-out;
+
+    &:hover {
+      // border-width: 5px;
+      // top: 2px;
+    }
+    &.active {
+      // border-width: 10px;
+      top: 4px;
+      height: 80px;
+      width: 80px;
+    }
 
     label {
       text-indent: -9999px;

@@ -43,15 +43,39 @@ button {
   button.reset {
     background: rgba(0, 0, 0, 0.3); }
 
+header {
+  position: relative;
+  margin-top: 20%;
+  transition-delay: 0;
+  transition-duration: .3s;
+  transition-property: all;
+  transition-timing-function: ease-in-out; }
+  header.active {
+    margin-top: 0; }
+    header.active h1 {
+      font-size: 2em; }
+    header.active h2 {
+      font-size: 1em; }
+
 section {
   position: relative;
   z-index: 2;
-  max-width: 900px;
-  margin: auto;
-  align-content: center;
-  justify-content: center; }
+  display: none;
+  transition-delay: 0;
+  transition-duration: .3s;
+  transition-property: all;
+  transition-timing-function: linear; }
   section#home {
-    display: block; }
+    display: block;
+    margin-top: 0; }
+  section#question, section#answer, section#results {
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    margin-top: -200px;
+    width: 100%;
+    text-align: center;
+    left: 0; }
 
 ul {
   clear: both;
@@ -82,7 +106,6 @@ ul {
       cursor: pointer;
       width: 70px;
       height: 70px;
-      background: red;
       display: inline-block;
       border: none;
       opacity: 0; }
@@ -114,6 +137,12 @@ h1, h2, h3 {
   text-transform: uppercase;
   letter-spacing: .1em;
   font-weight: 900; }
+
+h1, h2 {
+  transition-delay: 0;
+  transition-duration: .2s;
+  transition-property: all;
+  transition-timing-function: ease-in-out; }
 
 h1 {
   font-size: 4em;

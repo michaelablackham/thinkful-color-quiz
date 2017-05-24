@@ -26,6 +26,7 @@
   - [ ] generate correct or wrong screen with correct answer
   - [ ] add right or wrong styling to pager
   - [ ] keep track of right/wrong answers
+  - [ ] add "current" class to the current number pager that correlates to current question
 - [ ] restart
   - [ ] click on "start over" and go back to home and erase all answers
   - [ ] this should work on every screen

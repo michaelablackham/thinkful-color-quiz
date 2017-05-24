@@ -45,11 +45,11 @@
   //functions that render state
   //////////////////////////////////////////
   //create a for loop to gather 3 random numbers
-  var RGBValue = function (min, max) {
-    for (var i = 0; i <3; i++) {
-      connsole.log (Math.floor(Math.random() * 250 - 1)) ;
-    }
-  }
+  // var RGBValue = function (min, max) {
+  //   for (var i = 0; i <3; i++) {
+  //     connsole.log (Math.floor(Math.random() * 250 - 1)) ;
+  //   }
+  // }
 
   //////////////////////////////////////////
   //event listeners
@@ -68,6 +68,10 @@
   function initiateQuiz () {
     startButton ();
   }
-  //NEW RGB VALUE
-  initiateQuiz();
+
+  $(function () {
+    //NEW RGB VALUE
+    initiateQuiz();
+    console.log('Random RGB:', ColorQuiz.RandomRGB());
+  });
 // });

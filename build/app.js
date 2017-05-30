@@ -1,18 +1,72 @@
-// (function() {
+$(function() {
   'use strict';
+
   //////////////////////////////////////////
   //object state
   //////////////////////////////////////////
-  var state = {
-    // questions: [
-    //   {
-    //     rgba: rgbValue
-    //   }
-    // ]
-  };
 
-  var colors = {
-    value: []
+  var state = {
+    colors: [
+      {
+        colorName: 'maroon',
+        code: [128, 0, 0]
+      },
+      {
+        colorName: 'red',
+        code: [255, 0, 0]
+      },
+      {
+        colorName: 'orange',
+        code: [255, 165, 0]
+      },
+      {
+        colorName: 'yellow',
+        code: [255, 255, 0]
+      },
+      {
+        colorName: 'olive',
+        code: [128, 128, 0]
+      },
+      {
+        colorName: 'green',
+        code: [0, 128, 0]
+      },
+      {
+        colorName: 'purple',
+        code: [128, 0, 128]
+      },
+      {
+        colorName: 'fuchsia',
+        code: [255, 0, 255]
+      },
+      {
+        colorName: 'lime',
+        code: [0, 255, 0]
+      },
+      {
+        colorName: 'teal',
+        code: [0, 128, 128]
+      },
+      {
+        colorName: 'aqua',
+        code: [0, 255, 255]
+      },
+      {
+        colorName: 'blue',
+        code: [0, 0, 255]
+      },
+      {
+        colorName: 'navy',
+        code: [0, 0, 128]
+      }
+    ],
+    correctText: '',
+    wrongText: '(╯°□°）╯︵ ┻━┻',
+    score: 0,
+    currentQuestion: 0,
+    lastCorrect: false,
+    feedbackRandom: 0,
+    colorRandom: 0
   };
 
   //////////////////////////////////////////
@@ -74,4 +128,4 @@
     initiateQuiz();
     console.log('Random RGB:', ColorQuiz.RandomRGB());
   });
-// });
+});

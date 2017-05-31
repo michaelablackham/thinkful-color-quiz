@@ -64,6 +64,7 @@ $(function() {
     wrongText: '(╯°□°）╯︵ ┻━┻',
     score: 0,
     currentQuestion: 0,
+    currentPage: 'start',
     lastCorrect: false,
     feedbackRandom: 0,
     colorRandom: 0
@@ -90,10 +91,20 @@ $(function() {
   //   state.items[index] = newState;
   // }
 
+  function pageStart () {
+
+  }
+
   $(".options--input input").click(function () {
     $(".options--input").removeClass('active');
     $(this).parent().addClass('active');
   });
+
+  function renderSomething () {
+    var template = document;
+
+    template.replace('@content', 'My Content');
+  }
 
   //////////////////////////////////////////
   //functions that render state
@@ -126,6 +137,8 @@ $(function() {
   $(function () {
     //NEW RGB VALUE
     initiateQuiz();
+
+    $('#root').html($('#page-start').html())
     console.log('Random RGB:', ColorQuiz.RandomRGB());
   });
 });

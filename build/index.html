@@ -17,14 +17,12 @@
         <line x1="0" y1="0" x2="100%" y2="100%" style="stroke:rgba(250,250,250,.02);stroke-width:50%" />
       </svg>
 
+      <div id="root"></div>
+      <!--
       <header>
         <h1>Color Code</h1>
         <h2 class="subtitle">Can you guess the color of the RGB value?</h2>
       </header>
-
-      <section id="home" class="container">
-        <button class="start pulse-button">Let's Begin</button>
-      </section>
 
       <section id="question" class="container">
         <h2 class="question">What color is <span>rgb(50,20,150)</span>?</h2>
@@ -66,8 +64,63 @@
           <li></li>
         </ul>
       </div>
-
+    -->
     </main>
+
+    <script type="text/template">
+      <header>
+        <h1>Color Code</h1>
+        <h2 class="subtitle">Can you guess the color of the RGB value?</h2>
+      </header>
+      @content
+    </script>
+    <script type="text/template" id="page-start">
+      <header>
+        <h1>Color Code</h1>
+        <h2 class="subtitle">Can you guess the color of the RGB value?</h2>
+      </header>
+      <section id="home" class="screen-home container">
+        <button class="start pulse-button">Let's Begin</button>
+      </section>
+    </script>
+
+    <script type="text/template" id="page-result">
+
+    </script>
+    <script type="text/template" id="page-question">
+      <section id="question" class="container">
+        <h2 class="question">What color is <span>@color-rgb</span>?</h2>
+        <form>
+          <div class="options">
+            <div class="options--input" style="background: @color-rgb">
+              <input type="radio" id="input1" name="input">
+              <label for="input1">Color 1</label>
+            </div>
+            <div class="options--input">
+              <input type="radio" id="input2" name="input">
+              <label for="input2">Color 2</label>
+            </div>
+            <div class="options--input">
+              <input type="radio" id="input3" name="input">
+              <label for="input3">Color 3</label>
+            </div>
+          </div>
+          <button class="submit">Submit</button>
+          <button class="reset">Start over</button>
+        </form>
+      </section>
+    </script>
+    <script type="text/template" id="pager">
+      <div class="pager">
+        <h3>Progress</h3>
+        <ul>
+          @items
+        </ul>
+      </div>
+    </script>
+    <script type="text/template" id="pager-item">
+      <li class="@current"></li>
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="random-rgb.js"></script>

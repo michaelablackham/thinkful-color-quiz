@@ -67,18 +67,15 @@
     -->
     </main>
 
-    <script type="text/template">
+    <script type="text/template" id="page-header">
       <header>
         <h1>Color Code</h1>
         <h2 class="subtitle">Can you guess the color of the RGB value?</h2>
       </header>
       @content
     </script>
+
     <script type="text/template" id="page-start">
-      <header>
-        <h1>Color Code</h1>
-        <h2 class="subtitle">Can you guess the color of the RGB value?</h2>
-      </header>
       <section id="home" class="screen-home container">
         <button class="start pulse-button">Let's Begin</button>
       </section>
@@ -87,6 +84,7 @@
     <script type="text/template" id="page-result">
 
     </script>
+
     <script type="text/template" id="page-question">
       <section id="question" class="container">
         <h2 class="question">What color is <span>@color-rgb</span>?</h2>
@@ -110,6 +108,7 @@
         </form>
       </section>
     </script>
+
     <script type="text/template" id="pager">
       <div class="pager">
         <h3>Progress</h3>
@@ -118,9 +117,11 @@
         </ul>
       </div>
     </script>
+
     <script type="text/template" id="pager-item">
       <li class="@current"></li>
     </script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="random-rgb.js"></script>

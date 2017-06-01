@@ -60,21 +60,20 @@ $(function() {
         code: [0, 0, 128]
       }
     ],
-    correctText: '',
-    wrongText: '(╯°□°）╯︵ ┻━┻',
+    correctText: '(งツ)ว',
+    wrongText: [
+      '(╯°□°）╯︵ ┻━┻'
+    ],
     score: 0,
     currentQuestion: 0,
     currentPage: 'start',
     lastCorrect: false,
-    feedbackRandom: 0,
     colorRandom: 0
   };
 
   //////////////////////////////////////////
   //Variables
   //////////////////////////////////////////
-  var min = 0;
-  var max = 250;
 
   var progressItem = [
     '<li class="@result">',
@@ -95,6 +94,8 @@ $(function() {
 
   }
 
+  //Reset the entire time
+
   $(".options--input input").click(function () {
     $(".options--input").removeClass('active');
     $(this).parent().addClass('active');
@@ -103,18 +104,20 @@ $(function() {
   function renderSomething () {
     var template = document;
 
-    template.replace('@content', 'My Content');
+    document.replace('@content', '#page-start');
   }
 
   //////////////////////////////////////////
   //functions that render state
   //////////////////////////////////////////
   //create a for loop to gather 3 random numbers
-  // var RGBValue = function (min, max) {
-  //   for (var i = 0; i <3; i++) {
-  //     connsole.log (Math.floor(Math.random() * 250 - 1)) ;
-  //   }
-  // }
+  var Options = function (min, max) {
+    for (var i = 0; i <3; i++) {
+      connsole.log (Math.floor(Math.random() * 250 - 1)) ;
+    }
+  }
+
+
 
   //////////////////////////////////////////
   //event listeners
@@ -124,8 +127,7 @@ $(function() {
     $('button.start').click(function () {
       $('header').addClass('active');
       $('body').removeClass('home');
-      $('#home').hide();
-      $('#question').fadeIn('slow');
+      // $('#root').html($('#page-question').html())
       $('.pager').fadeIn();
     });
   }
@@ -137,8 +139,7 @@ $(function() {
   $(function () {
     //NEW RGB VALUE
     initiateQuiz();
-
-    $('#root').html($('#page-start').html())
+    $('#root').html($('#page-header').html());
     console.log('Random RGB:', ColorQuiz.RandomRGB());
   });
 });

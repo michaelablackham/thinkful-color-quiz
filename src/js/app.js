@@ -166,8 +166,8 @@ $(function() {
   //event listeners
   //////////////////////////////////////////
 
-  function startButton (state, SECTION_ELEMENTS) {
-    $('button.start').click(function (state, SECTION_ELEMENTS) {
+  function startButton (state) {
+    $('button.start').click(function () {
       $('body').removeClass('home').addClass('active');
       setCurrentPage(state, 'pageQuestion');
       initiateQuiz(state, SECTION_ELEMENTS);

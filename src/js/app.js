@@ -66,7 +66,7 @@ $(function() {
     ],
     score: 0,
     currentQuestion: 0,
-    currentPage: 'start',
+    currentPage: 'pageStart',
     lastCorrect: false,
     colorRandom: 0
   };
@@ -75,71 +75,127 @@ $(function() {
   //Variables
   //////////////////////////////////////////
 
-  var progressItem = [
-    '<li class="@result">',
-      '<i class="fa fa-@check" aria-hidden="true"></i>',
-    '</li>'
-  ].join('');
+  var SECTION_ELEMENTS = {
+    // 'pageHeader':  $('#page-header'),
+    'pageStart':  $('#page-start'),
+    'pageQuestion':  $('#page-question'),
+    'pageAnswer':  $('#page-answer'),
+    'pageResult':  $('#page-results')
+  }
+
+  // var progressItem = [
+  //   '<li class="@result">',
+  //     '<i class="fa fa-@check" aria-hidden="true"></i>',
+  //   '</li>'
+  // ].join('');
 
   //////////////////////////////////////////
   //state modification functions
   //////////////////////////////////////////
+
+  //set the initial currentPage
+  function setCurrentPage(state, currentPage) {
+    state.currentPage = currentPage;
+    console.log(state.currentPage)
+  };
+
+  function reset(state) {
+    state.score = 0;
+    state.currentQuestion = 0;
+    setCurrentPage(state, 'pageStart');
+  };
+
+  function advance(state) {
+    // state.currentQuestion++;
+    // if (state.currentQuestionIndex === state.questions.length) {
+    //   setRoute(state, 'final-feedback');
+    // }
+    // else {
+      // setCurrentPage(state, 'pageQuestion');
+    // }
+  };
 
   //CHOOSE ITEM ITEM
   // function checkItem (state, index, newState) {
   //   state.items[index] = newState;
   // }
 
-  function pageStart () {
+  function startPage (state, element) {
+    startButton();
+  };
 
-  }
+  function questionPage (state, element) {
+    console.log('question test')
+  };
 
   //Reset the entire time
 
-  $(".options--input input").click(function () {
-    $(".options--input").removeClass('active');
-    $(this).parent().addClass('active');
-  });
+  // $(".options--input input").click(function () {
+  //   $(".options--input").removeClass('active');
+  //   $(this).parent().addClass('active');
+  // });
 
-  function renderSomething () {
-    var template = document;
-
-    document.replace('@content', '#page-start');
-  }
+  // function renderSomething () {
+  //   var template = document;
+  //
+  //   document.replace('@content', '#page-start');
+  // }
 
   //////////////////////////////////////////
   //functions that render state
   //////////////////////////////////////////
-  //create a for loop to gather 3 random numbers
-  var Options = function (min, max) {
-    for (var i = 0; i <3; i++) {
-      connsole.log (Math.floor(Math.random() * 250 - 1)) ;
+  function renderApplication(state, elements) {
+    // default to hiding all routes, then show the current route
+    console.log(state.currentPage + ' first')
+    Object.keys(elements).forEach(function(currentPage) {
+      elements[currentPage].hide();
+    });
+
+    console.log(state.currentPage + ' second')
+    elements[state.currentPage].show();
+    console.log(state.currentPage + ' third')
+
+    if (state.currentPage === 'pageStart') {
+        startPage(state, elements[state.currentPage]);
     }
-  }
+    else if (state.currentPage === 'pageQuestion') {
+        questionPage(state, elements[state.currentPage]);
+    }
+    else if (state.currentPage === 'pageAnswer') {
+      AnswerPage(state, elements[state.currentPage]);
+    }
+    else if (state.currentPage === 'pageResult') {
+      resultsPage(state, elements[state.currentPage]);
+    }
+  };
 
-
+  //create a for loop to gather 3 random numbers
+  // var Options = function (min, max) {
+  //   for (var i = 0; i <3; i++) {
+  //     connsole.log (Math.floor(Math.random() * 250 - 1)) ;
+  //   }
+  // }
 
   //////////////////////////////////////////
   //event listeners
   //////////////////////////////////////////
 
-  function startButton () {
-    $('button.start').click(function () {
+  function startButton (state, SECTION_ELEMENTS) {
+    $('button.start').click(function (state, SECTION_ELEMENTS) {
       $('header').addClass('active');
       $('body').removeClass('home');
-      // $('#root').html($('#page-question').html())
+      setCurrentPage(state, 'pageQuestion');
+      renderApplication(state, SECTION_ELEMENTS);
       $('.pager').fadeIn();
     });
   }
 
-  function initiateQuiz () {
-    startButton ();
-  }
+  // function initiateQuiz (state, SECTION_ELEMENTS) {
+  //   $(pageStart).show();
+  //   startButton (state, SECTION_ELEMENTS);
+  // }
 
   $(function () {
-    //NEW RGB VALUE
-    initiateQuiz();
-    $('#root').html($('#page-header').html());
-    console.log('Random RGB:', ColorQuiz.RandomRGB());
+    renderApplication(state, SECTION_ELEMENTS);
   });
 });

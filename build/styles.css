@@ -65,10 +65,10 @@ section {
   transition-duration: .3s;
   transition-property: all;
   transition-timing-function: linear; }
-  section#home {
+  section#home, section#page-start {
     display: block;
     margin-top: 0; }
-  section#question, section#answer, section#results {
+  section#page-question, section#page-answer, section#page-results {
     height: 400px;
     position: absolute;
     top: 50%;

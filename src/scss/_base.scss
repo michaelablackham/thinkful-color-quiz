@@ -85,14 +85,15 @@ section {
   transition-property: all;
   transition-timing-function: linear;
 
-  &#home {
+  &#home,
+  &#page-start {
     display:block;
     margin-top: 0;
   }
 
-  &#question,
-  &#answer,
-  &#results {
+  &#page-question,
+  &#page-answer,
+  &#page-results {
     height: 400px;
     position: absolute;
     top: 50%;

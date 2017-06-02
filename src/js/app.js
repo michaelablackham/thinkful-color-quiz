@@ -122,7 +122,15 @@ $(function() {
   };
 
   function startPage (state, element) {
-    startButton();
+    // var template = [
+    //   "<section id='page-start' class='screen-home container'>",
+    //   "  <button class='start pulse-button'>Let's Begin</button>",
+    //   "</section>"
+    // ].join('');
+    //
+    // element.html(template);
+    // addUIHandlers(state, element);
+    startButton(state);
   };
 
   function questionPage (state, element) {
@@ -139,8 +147,8 @@ $(function() {
   //////////////////////////////////////////
   //functions that render state
   //////////////////////////////////////////
-  function initiateQuiz(state, elements) {
-    console.log(state.currentPage+' initiateQuiz')
+  function renderQuiz(state, elements) {
+    console.log(state.currentPage+' renderQuiz')
     // default to hiding all routes, then show the current route
     Object.keys(elements).forEach(function(currentPage) {
       elements[currentPage].hide();
@@ -155,7 +163,7 @@ $(function() {
       questionPage(state, elements[state.currentPage]);
     }
     else if (state.currentPage === 'pageAnswer') {
-      AnswerPage(state, elements[state.currentPage]);
+      answerPage(state, elements[state.currentPage]);
     }
     else if (state.currentPage === 'pageResult') {
       resultsPage(state, elements[state.currentPage]);
@@ -170,12 +178,12 @@ $(function() {
     $('button.start').click(function () {
       $('body').removeClass('home').addClass('active');
       setCurrentPage(state, 'pageQuestion');
-      initiateQuiz(state, SECTION_ELEMENTS);
+      renderQuiz(state, SECTION_ELEMENTS);
       $('.pager').fadeIn();
     });
   }
 
   $(function () {
-    initiateQuiz(state, SECTION_ELEMENTS);
+    renderQuiz(state, SECTION_ELEMENTS);
   });
 });

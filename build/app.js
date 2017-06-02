@@ -1,10 +1,8 @@
 $(function() {
   'use strict';
-
   //////////////////////////////////////////
   //object state
   //////////////////////////////////////////
-
   var state = {
     colors: [
       {
@@ -71,14 +69,12 @@ $(function() {
       }
     ],
     correctText: '(งツ)ว',
-    wrongText: [
-      '(╯°□°）╯︵ ┻━┻'
-    ],
+    wrongText: '(╯°□°）╯︵ ┻━┻',
     score: 0,
     currentQuestion: 0,
     currentPage: 'pageStart',
     lastCorrect: false,
-    correctColor: ''
+    correctColor: []
   };
 
   //////////////////////////////////////////
@@ -106,7 +102,7 @@ $(function() {
   //set the initial currentPage
   function setCurrentPage(state, currentPage) {
     state.currentPage = currentPage;
-    console.log(state.currentPage)
+    console.log(state.currentPage + ' setting current page')
   };
 
   function reset(state) {
@@ -117,18 +113,13 @@ $(function() {
 
   function advance(state) {
     // state.currentQuestion++;
-    // if (state.currentQuestionIndex === state.questions.length) {
-    //   setRoute(state, 'final-feedback');
+    // if (state.currentQuestion === 5) {
+    //   setRoute(state, 'pageResult');
     // }
     // else {
-      // setCurrentPage(state, 'pageQuestion');
+      // currentPage(state, 'pageQuestion');
     // }
   };
-
-  //CHOOSE ITEM ITEM
-  // function checkItem (state, index, newState) {
-  //   state.items[index] = newState;
-  // }
 
   function startPage (state, element) {
     startButton();
@@ -139,22 +130,17 @@ $(function() {
   };
 
   //Reset the entire time
-
   // $(".options--input input").click(function () {
   //   $(".options--input").removeClass('active');
   //   $(this).parent().addClass('active');
   // });
 
-  // function renderSomething () {
-  //   var template = document;
-  //
-  //   document.replace('@content', '#page-start');
-  // }
 
   //////////////////////////////////////////
   //functions that render state
   //////////////////////////////////////////
-  function renderApplication(state, elements) {
+  function initiateQuiz(state, elements) {
+    console.log(state.currentPage+' initiateQuiz')
     // default to hiding all routes, then show the current route
     Object.keys(elements).forEach(function(currentPage) {
       elements[currentPage].hide();
@@ -176,33 +162,20 @@ $(function() {
     }
   };
 
-  //create a for loop to gather 3 random numbers
-  // var Options = function (min, max) {
-  //   for (var i = 0; i <3; i++) {
-  //     connsole.log (Math.floor(Math.random() * 250 - 1)) ;
-  //   }
-  // }
-
   //////////////////////////////////////////
   //event listeners
   //////////////////////////////////////////
 
   function startButton (state, SECTION_ELEMENTS) {
     $('button.start').click(function (state, SECTION_ELEMENTS) {
-      $('header').addClass('active');
-      $('body').removeClass('home');
+      $('body').removeClass('home').addClass('active');
       setCurrentPage(state, 'pageQuestion');
-      renderApplication(state, SECTION_ELEMENTS);
+      initiateQuiz(state, SECTION_ELEMENTS);
       $('.pager').fadeIn();
     });
   }
 
-  // function initiateQuiz (state, SECTION_ELEMENTS) {
-  //   $(pageStart).show();
-  //   startButton (state, SECTION_ELEMENTS);
-  // }
-
   $(function () {
-    renderApplication(state, SECTION_ELEMENTS);
+    initiateQuiz(state, SECTION_ELEMENTS);
   });
 });

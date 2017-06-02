@@ -9,6 +9,12 @@ body {
     animation: colorchange 13s infinite;
     -webkit-animation: colorchange 13s infinite;
     /* Chrome and Safari */ }
+  body.active header {
+    margin-top: 0; }
+    body.active header h1 {
+      font-size: 2em; }
+    body.active header h2 {
+      font-size: 1em; }
 
 .body--decoration {
   position: absolute;
@@ -50,12 +56,6 @@ header {
   transition-duration: .3s;
   transition-property: all;
   transition-timing-function: ease-in-out; }
-  header.active {
-    margin-top: 0; }
-    header.active h1 {
-      font-size: 2em; }
-    header.active h2 {
-      font-size: 1em; }
 
 section {
   position: relative;

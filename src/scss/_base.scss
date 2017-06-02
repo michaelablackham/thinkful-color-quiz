@@ -11,6 +11,21 @@ body {
     animation: colorchange 13s infinite;
     -webkit-animation: colorchange 13s infinite; /* Chrome and Safari */
   }
+
+  &.active {
+
+    header {
+      margin-top: 0;
+
+       h1 {
+         font-size: 2em;
+       }
+
+      h2 {
+        font-size: 1em;
+      }
+    }
+  }
 }
 
 .body--decoration {
@@ -63,17 +78,17 @@ header {
   transition-property: all;
   transition-timing-function: ease-in-out;
 
-  &.active {
-    margin-top: 0;
-
-     h1 {
-       font-size: 2em;
-     }
-
-    h2 {
-      font-size: 1em;
-    }
-  }
+  // &.active {
+  //   margin-top: 0;
+  //
+  //    h1 {
+  //      font-size: 2em;
+  //    }
+  //
+  //   h2 {
+  //     font-size: 1em;
+  //   }
+  // }
 }
 
 section {

@@ -21,43 +21,53 @@ $(function() {
       },
       {
         colorName: 'yellow',
-        code: [255, 255, 0]
+        code: [255, 255, 0],
+        correct: 'false'
       },
       {
         colorName: 'olive',
-        code: [128, 128, 0]
+        code: [128, 128, 0],
+        correct: 'false'
       },
       {
         colorName: 'green',
-        code: [0, 128, 0]
+        code: [0, 128, 0],
+        correct: 'false'
       },
       {
         colorName: 'purple',
-        code: [128, 0, 128]
+        code: [128, 0, 128],
+        correct: 'false'
       },
       {
         colorName: 'fuchsia',
-        code: [255, 0, 255]
+        code: [255, 0, 255],
+        correct: 'false'
       },
       {
         colorName: 'lime',
-        code: [0, 255, 0]
+        code: [0, 255, 0],
+        correct: 'false'
       },
       {
         colorName: 'teal',
-        code: [0, 128, 128]
+        code: [0, 128, 128],
+        correct: 'false'
       },
       {
         colorName: 'aqua',
-        code: [0, 255, 255]
+        code: [0, 255, 255],
+        correct: 'false'
       },
       {
         colorName: 'blue',
-        code: [0, 0, 255]
+        code: [0, 0, 255],
+        correct: 'false'
       },
       {
         colorName: 'navy',
-        code: [0, 0, 128]
+        code: [0, 0, 128],
+        correct: 'false'
       }
     ],
     correctText: '(งツ)ว',
@@ -68,7 +78,7 @@ $(function() {
     currentQuestion: 0,
     currentPage: 'pageStart',
     lastCorrect: false,
-    colorRandom: 0
+    correctColor: ''
   };
 
   //////////////////////////////////////////
@@ -146,20 +156,17 @@ $(function() {
   //////////////////////////////////////////
   function renderApplication(state, elements) {
     // default to hiding all routes, then show the current route
-    console.log(state.currentPage + ' first')
     Object.keys(elements).forEach(function(currentPage) {
       elements[currentPage].hide();
     });
 
-    console.log(state.currentPage + ' second')
     elements[state.currentPage].show();
-    console.log(state.currentPage + ' third')
 
     if (state.currentPage === 'pageStart') {
-        startPage(state, elements[state.currentPage]);
+      startPage(state, elements[state.currentPage]);
     }
     else if (state.currentPage === 'pageQuestion') {
-        questionPage(state, elements[state.currentPage]);
+      questionPage(state, elements[state.currentPage]);
     }
     else if (state.currentPage === 'pageAnswer') {
       AnswerPage(state, elements[state.currentPage]);

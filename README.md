@@ -11,7 +11,7 @@
 /results
 ```
 
-## Tasks
+## Tasks Per Panel
 
 - [ ] start Quiz
   - [ ] home screen fades out and first question appears on button click
@@ -30,3 +30,20 @@
 - [ ] restart
   - [ ] click on "start over" and go back to home and erase all answers
   - [ ] this should work on every screen
+
+## Tasks for STATE
+- [ ] colors
+- [ ] correct answer text
+- [ ] incorrect answer text
+- [ ] current score
+- [ ] current question
+- [ ] current page
+- [ ] last correct answer (boolean)
+- [ ] randomly chosen color (color to guess - default = false)
+- [ ] randomly chosen color (for 2 extra options)
+
+##Tasks for routes
+
+- [ ] render entire application
+  - [ ] this is the starting point for the entire page
+  - [ ] create a function that says we are on

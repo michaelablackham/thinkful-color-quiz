@@ -10,40 +10,50 @@
 /questions/:question/result
 /results
 ```
-
-## Tasks Per Panel
-
-- [ ] start Quiz
-  - [ ] home screen fades out and first question appears on button click
-  - [ ] add class "active" to header
-  - [ ] remove class "home" from body
-- [ ] questions
-  - [ ] randomly generate a RGB() color code to guess
-  - [ ] add this value to question and to one input
-  - [ ] randomly generate 2 other RGB values and add to inputs
-  - [ ] submit question on button click
-  - [ ] check if answer is correct
-  - [ ] generate correct or wrong screen with correct answer
-  - [ ] add right or wrong styling to pager
-  - [ ] keep track of right/wrong answers
-  - [ ] add "current" class to the current number pager that correlates to current question
-- [ ] restart
-  - [ ] click on "start over" and go back to home and erase all answers
-  - [ ] this should work on every screen
-
 ## Tasks for STATE
-- [ ] colors
-- [ ] correct answer text
-- [ ] incorrect answer text
-- [ ] current score
-- [ ] current question
-- [ ] current page
-- [ ] last correct answer (boolean)
+- [x] colors (list)
+- [x] correct answer text
+- [x] incorrect answer text
+- [x] current score
+- [x] current question count
+- [x] current page
+- [x] last correct answer (boolean)
 - [ ] randomly chosen color (color to guess - default = false)
 - [ ] randomly chosen color (for 2 extra options)
 
-##Tasks for routes
+## Tasks
 
-- [ ] render entire application
-  - [ ] this is the starting point for the entire page
-  - [ ] create a function that says we are on
+- [ ] render application
+  - [x] create a function that says which section we are currently on
+  - [x] set the current page to start (on load)
+  - [x] this is based off of the currentPage object that gets assigned depending on which number we are on
+  - [ ] call a function for what happens on each page depending on the currentPage object
+- [ ] start Quiz
+  - [x] background color change
+  - [x] pulsing button
+  - [ ] start button click
+    - [ ] home screen fades out and question section appears
+    - [x] header gets smaller and goes to top of page
+    - [x] add class "active" to header
+    - [x] remove class "home" from body
+    - [ ] pager appears
+- [ ] questions
+  - [ ] randomly choose a color to guess from state
+  - [ ] add this value to question and to one randomly chosen input (1 of 3)
+  - [ ] randomly choose 2 other RGB values and add to remaining inputs
+  - [ ] submit question on button click
+  - [ ] check if answer is correct
+- [ ] answer screen
+  - [ ] generate correct or wrong screen with text and correct answer
+  - [ ] add right or wrong styling to pager
+  - [ ] keep track of right/wrong answers
+  - [ ] add "current" class to the current number pager that correlates to current question
+- [ ] advance to new question
+  - [ ] if questionCount !== 5
+  - [ ] add ++ to questionCount
+  - [ ] add right or wrong to pager
+- [ ] final result page
+  - [ ] appears after question count === 5
+  - [ ] shows number right vs wrongText
+- [ ] restart
+  - [ ] click on "start over" and go back to home and set all state objects back to defaults

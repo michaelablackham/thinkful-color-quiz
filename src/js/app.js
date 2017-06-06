@@ -119,6 +119,10 @@ $(function() {
     renderQuestion(state);
   }
 
+  function answerPage (state) {
+    console.log("answer");
+  }
+
   function renderQuiz(state, elements) {
     // default to hiding all current page, then show the currentpage
     Object.keys(elements).forEach(function (currentPage) {
@@ -187,9 +191,13 @@ $(function() {
     var answer = $("input:checked").parent().parent().index();
     if ( answer === state.question.answer ) {
       console.log("correct!")
+      state.lastCorrect = 'true'
     } else {
       console.log("WRRRONNNGG!")
     }
+
+    setCurrentPage(state, 'pageAnswer');
+    renderQuiz(state, SECTION_ELEMENTS);
   });
 
   function startButton(state) {

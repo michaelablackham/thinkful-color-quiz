@@ -191,9 +191,13 @@ $(function() {
     var answer = $("input:checked").parent().parent().index();
     if ( answer === state.question.answer ) {
       console.log("correct!")
-      state.lastCorrect = 'true'
+      $('#page-answer h2').text(state.correctEmoji);
+      $('#page-answer h3').text(state.correctText);
+      // state.lastCorrect = 'true'
     } else {
       console.log("WRRRONNNGG!")
+      $('#page-answer h2').text(state.wrongEmoji);
+      $('#page-answer h3').text(state.wrongText);
     }
 
     setCurrentPage(state, 'pageAnswer');

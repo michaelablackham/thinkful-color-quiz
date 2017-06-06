@@ -179,6 +179,11 @@ h2 {
   h2 > span {
     opacity: .3; }
 
+#page-answer h2 {
+  font-size: 3em;
+  font-weight: normal;
+  letter-spacing: 0; }
+
 h3 {
   display: inline-block;
   margin: 0 20px 0;

@@ -45,7 +45,7 @@ $(function() {
   // set current progress item
   function currentProgress(state) {
     var currentQuestion = state.currentQuestion - 1;
-    $('.pager li').eq(currentQuestion).addClass("active");
+    $('.pager li').eq(currentQuestion).addClass("current");
   }
 
   // set the initial currentPage
@@ -81,7 +81,7 @@ $(function() {
 
   function renderQuestion(state) {
     pushQuestionInfo(state);
-    $('h2.question .color span').text(state.question.choices[state.question.answer]);
+    createQuestionText(state);
     currentProgress(state);
     applyColors(state);
   }
@@ -89,12 +89,13 @@ $(function() {
   // Apply colors to options
   var applyColors = function (state) {
     var choicesHTML = '';
+    var index = 0;
 
     state.question.choices.forEach(function () {
-      var choiceHTML = choicesTemplate.replace('@color', state.question.choices[1]);
+      var choiceHTML = choicesTemplate.replace('@color', state.question.choices[index]);
       choicesHTML += choiceHTML;
+      index++;
     });
-
     $('.options').html(choicesHTML);
   };
 
@@ -132,6 +133,11 @@ $(function() {
   //////////////////////////////////////////
   // event listeners
   //////////////////////////////////////////
+
+  // Add "correct color" to question text
+  function createQuestionText(state) {
+    $('h2.question .color span').text(state.question.choices[state.question.answer]);
+  }
 
   // CHOOSE RANDOM CORRECT ANSWER
   var randomCorrect = function (state, elements) {

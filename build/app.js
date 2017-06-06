@@ -4,69 +4,23 @@ $(function() {
   //object state
   //////////////////////////////////////////
   var state = {
-    colors: [
+    question: [
       {
-        colorName: 'maroon',
-        code: [128, 0, 0]
+        choices: [],
+        correctAnswer: 0
       },
       {
-        colorName: 'red',
-        code: [255, 0, 0]
+        choices: [],
+        correctAnswer: 0
       },
       {
-        colorName: 'orange',
-        code: [255, 165, 0]
+        choices: [],
+        correctAnswer: 0
       },
       {
-        colorName: 'yellow',
-        code: [255, 255, 0],
-        correct: 'false'
+        choices: [],
+        correctAnswer: 0
       },
-      {
-        colorName: 'olive',
-        code: [128, 128, 0],
-        correct: 'false'
-      },
-      {
-        colorName: 'green',
-        code: [0, 128, 0],
-        correct: 'false'
-      },
-      {
-        colorName: 'purple',
-        code: [128, 0, 128],
-        correct: 'false'
-      },
-      {
-        colorName: 'fuchsia',
-        code: [255, 0, 255],
-        correct: 'false'
-      },
-      {
-        colorName: 'lime',
-        code: [0, 255, 0],
-        correct: 'false'
-      },
-      {
-        colorName: 'teal',
-        code: [0, 128, 128],
-        correct: 'false'
-      },
-      {
-        colorName: 'aqua',
-        code: [0, 255, 255],
-        correct: 'false'
-      },
-      {
-        colorName: 'blue',
-        code: [0, 0, 255],
-        correct: 'false'
-      },
-      {
-        colorName: 'navy',
-        code: [0, 0, 128],
-        correct: 'false'
-      }
     ],
     correctText: '(งツ)ว',
     wrongText: '(╯°□°）╯︵ ┻━┻',
@@ -102,7 +56,6 @@ $(function() {
   //set the initial currentPage
   function setCurrentPage(state, currentPage) {
     state.currentPage = currentPage;
-    console.log(state.currentPage + ' setting current page')
   };
 
   function reset(state) {
@@ -121,6 +74,35 @@ $(function() {
     // }
   };
 
+  //CHOOSE RANDOM CORRECT ANSWER
+  var randomCorrect = function (state) {
+    var number = Math.floor(Math.random() * 3);
+    console.log(number)
+  }
+
+  //GENERATOR RANDOM 3 VALUES
+  var randomColor = function (state) {
+
+    var colorCode = [];
+    for (var i = 0; i <3; i++) {
+      var number = Math.floor(Math.random() * 250);
+      colorCode.push(number);
+    }
+    return colorCode;
+  }
+
+  //PUSH RANDOM COLORS TO STATE
+  var randomChoices = function (state) {
+    var colorCode = [];
+
+    for (var i = 0; i <3; i++) {
+      var number = randomColor();
+      colorCode.push(number);
+    }
+
+    return colorCode;
+  }
+
   function startPage (state, element) {
     // var template = [
     //   "<section id='page-start' class='screen-home container'>",
@@ -134,15 +116,8 @@ $(function() {
   };
 
   function questionPage (state, element) {
-    console.log('question test')
+    console.log(randomChoices());
   };
-
-  //Reset the entire time
-  // $(".options--input input").click(function () {
-  //   $(".options--input").removeClass('active');
-  //   $(this).parent().addClass('active');
-  // });
-
 
   //////////////////////////////////////////
   //functions that render state

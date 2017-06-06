@@ -8,9 +8,9 @@ $(function() {
   var state = {
     question: [],
     correctEmoji: '(งツ)ว',
-    correctText: 'Great job! You must live ina  world of rainbows and unicorns!',
+    correctText: 'Great job! You must live in a  world of rainbows and unicorns!',
     wrongEmoji: '(╯°□°）╯︵ ┻━┻',
-    wrongText: 'Seriously? Is your favorite color black like your soul?',
+    wrongText: 'Seriously? Is your favorite color black, like your soul?',
     score: 0,
     currentQuestion: 0,
     currentPage: 'pageStart',
@@ -31,8 +31,8 @@ $(function() {
   var choicesTemplate = [
     '<div class="options--choice">',
     '<div class="options--input" style="background-color: rgb( @color );">',
-    '<input type="radio" data-item-id="@index" name="input">',
-    '<label for="@index">Color @index</label>',
+    '<input type="radio" name="input">',
+    '<label>Color @index</label>',
     '</div>',
     '</div>'
   ].join('');
@@ -65,13 +65,18 @@ $(function() {
   }
 
   function advance(state) {
-    // state.currentQuestion++;
-    // if (state.currentQuestion === 5) {
-    //   setRoute(state, 'pageResult');
-    // }
-    // else {
-      // currentPage(state, 'pageQuestion');
-    // }
+    state.currentQuestion++;
+    if (state.currentQuestion === 5) {
+      currentPage(state, 'pageResult');
+    }
+    else {
+      currentPage(state, 'pageQuestion');
+    }
+  }
+
+  function answerQuestion(state) {
+    var currentQuestion = state.currentQuestion;
+
   }
 
   // Push colors to state
@@ -82,6 +87,7 @@ $(function() {
 
   function startPage(state, element) {
     startButton(state);
+    // resetButton(state);
   }
 
   function renderQuestion(state) {
@@ -175,12 +181,31 @@ $(function() {
     return colorCode;
   };
 
+
+  $("form[name='current-question']").submit(function(event) {
+    event.preventDefault();
+    var answer = $("input:checked").parent().parent().index();
+    if ( answer === state.question.answer ) {
+      console.log("correct!")
+    } else {
+      console.log("WRRRONNNGG!")
+    }
+  });
+
   function startButton(state) {
     $('button.start').click(function () {
       $('body').removeClass('home').addClass('active');
       setCurrentPage(state, 'pageQuestion');
       renderQuiz(state, SECTION_ELEMENTS);
       $('.pager').fadeIn();
+    });
+  }
+
+  function resetButton(state, PAGE_ELEMENTS) {
+    $(".reset").click(function(event){
+      event.preventDefault();
+      reset(state);
+      renderQuiz(state, PAGE_ELEMENTS);
     });
   }
 

@@ -4,31 +4,13 @@ $(function() {
   //object state
   //////////////////////////////////////////
   var state = {
-    question: [
-      {
-        choices: [],
-        correctAnswer: 0
-      },
-      {
-        choices: [],
-        correctAnswer: 0
-      },
-      {
-        choices: [],
-        correctAnswer: 0
-      },
-      {
-        choices: [],
-        correctAnswer: 0
-      },
-    ],
+    question: [],
     correctText: '(งツ)ว',
     wrongText: '(╯°□°）╯︵ ┻━┻',
     score: 0,
     currentQuestion: 0,
     currentPage: 'pageStart',
     lastCorrect: false,
-    correctColor: []
   };
 
   //////////////////////////////////////////
@@ -42,6 +24,13 @@ $(function() {
     'pageAnswer':  $('#page-answer'),
     'pageResult':  $('#page-results')
   }
+
+  var choicesTemplate = [
+    '<div class="options--input" style="background-color: rgba(@color);">',
+      '<input type="radio" id="input@index" name="input">',
+      '<label for="input@index">Color @index</label>',
+    '</div>'
+  ].join('');
 
   // var progressItem = [
   //   '<li class="@result">',
@@ -75,14 +64,12 @@ $(function() {
   };
 
   //CHOOSE RANDOM CORRECT ANSWER
-  var randomCorrect = function (state) {
+  var randomCorrect = function (state, elements) {
     var number = Math.floor(Math.random() * 3);
-    console.log(number)
   }
 
-  //GENERATOR RANDOM 3 VALUES
+  //Generate one random color
   var randomColor = function (state) {
-
     var colorCode = [];
     for (var i = 0; i <3; i++) {
       var number = Math.floor(Math.random() * 250);
@@ -91,37 +78,54 @@ $(function() {
     return colorCode;
   }
 
-  //PUSH RANDOM COLORS TO STATE
+  //get three random RGB codes
   var randomChoices = function (state) {
     var colorCode = [];
-
     for (var i = 0; i <3; i++) {
       var number = randomColor();
       colorCode.push(number);
     }
-
     return colorCode;
   }
 
+  //push colors to state
+  function pushQuestionInfo (state) {
+    state.question.choices = randomChoices();
+    state.question.answer = randomCorrect();
+  }
+
   function startPage (state, element) {
-    // var template = [
-    //   "<section id='page-start' class='screen-home container'>",
-    //   "  <button class='start pulse-button'>Let's Begin</button>",
-    //   "</section>"
-    // ].join('');
-    //
-    // element.html(template);
-    // addUIHandlers(state, element);
     startButton(state);
   };
 
-  function questionPage (state, element) {
-    console.log(randomChoices());
-  };
+  function createQuestion (state) {
+    pushQuestionInfo(state);
+    $('h2.question .color span').text(state.question.choices[1]);
+  }
+
+  //Apply colors to options
+  var applyColors = function (state) {
+    var choicesHTML = '';
+
+    state.question.forEach(function(index){
+      var choiceHTML = choicesTemplate.replace('@index', index);
+      choicesHTML += choiceHTML;
+    });
+
+    $('.options').html(choicesHTML);
+  }
 
   //////////////////////////////////////////
   //functions that render state
   //////////////////////////////////////////
+  function questionPage (state) {
+    state.currentQuestion++;
+    // pushQuestionInfo(state);
+    createQuestion(state);
+    // applyColors(state);
+    console.log(state)
+  };
+
   function renderQuiz(state, elements) {
     console.log(state.currentPage+' renderQuiz')
     // default to hiding all routes, then show the current route

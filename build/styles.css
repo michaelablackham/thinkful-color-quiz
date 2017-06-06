@@ -91,38 +91,42 @@ ul {
 .options {
   margin: 3em 0;
   text-align: center; }
+  .options .options--choice {
+    display: inline-block;
+    height: 90px;
+    margin: 0;
+    position: relative;
+    width: 90px; }
   .options .options--input {
-    background: blue;
     border: 3px solid #fff;
     border-radius: 50%;
     box-sizing: border-box;
     height: 70px;
-    margin: 0 10px;
-    width: 70px;
-    display: inline-block;
-    position: relative;
-    transition-delay: 0;
-    transition-duration: .1s;
+    left: 10px;
+    position: absolute;
+    top: 10px;
+    transition-duration: .2s;
     transition-property: all;
-    transition-timing-function: ease-in-out; }
+    transition-timing-function: linear;
+    width: 70px; }
     .options .options--input:hover {
-      border-width: 5px;
-      top: 2px; }
+      border-width: 5px; }
     .options .options--input.active {
       border-width: 10px;
-      top: 4px;
       height: 80px;
+      left: 5px;
+      top: 5px;
       width: 80px; }
     .options .options--input label {
-      text-indent: -9999px;
-      display: none; }
-    .options .options--input input[type=radio] {
+      display: none;
+      text-indent: -9999px; }
+    .options .options--input input[type="radio"] {
+      border: 0;
       cursor: pointer;
-      width: 70px;
-      height: 70px;
       display: inline-block;
-      border: none;
-      opacity: 0; }
+      height: 70px;
+      opacity: 0;
+      width: 70px; }
 
 .pager {
   display: none;

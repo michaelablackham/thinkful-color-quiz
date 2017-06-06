@@ -26,9 +26,11 @@ $(function() {
   }
 
   var choicesTemplate = [
+    '<div class="options--choice">',
     '<div class="options--input" style="background-color: rgb( @color );">',
     '<input type="radio" data-item-id="@index" name="input">',
     '<label for="@index">Color @index</label>',
+    '</div>',
     '</div>'
   ].join('');
 

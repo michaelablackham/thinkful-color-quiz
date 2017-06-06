@@ -26,7 +26,7 @@ $(function() {
   }
 
   var choicesTemplate = [
-    '<div class="options--input" style="background-color: rgba(@color);">',
+    '<div class="options--input" style="background-color: rgb( @color );">',
       '<input type="radio" data-item-id="@index" name="input">',
       '<label for="@index">Color @index</label>',
     '</div>'
@@ -70,31 +70,6 @@ $(function() {
     // }
   };
 
-  //CHOOSE RANDOM CORRECT ANSWER
-  var randomCorrect = function (state, elements) {
-    var number = Math.floor(Math.random() * 3);
-  }
-
-  //Generate one random color
-  var randomColor = function (state) {
-    var colorCode = [];
-    for (var i = 0; i <3; i++) {
-      var number = Math.floor(Math.random() * 250);
-      colorCode.push(number);
-    }
-    return colorCode;
-  }
-
-  //get three random RGB codes
-  var randomChoices = function (state) {
-    var colorCode = [];
-    for (var i = 0; i <3; i++) {
-      var number = randomColor();
-      colorCode.push(number);
-    }
-    return colorCode;
-  }
-
   //push colors to state
   function pushQuestionInfo (state) {
     state.question.choices = randomChoices();
@@ -117,8 +92,8 @@ $(function() {
     var choicesHTML = '';
     console.log('test1')
 
-    state.question.forEach(function(index){
-      var choiceHTML = choicesTemplate.replace('@index', '1');
+    state.question.choices.forEach(function(index){
+      var choiceHTML = choicesTemplate.replace('@color', state.question.choices[1]);
       choicesHTML += choiceHTML;
       console.log('test')
     });
@@ -160,6 +135,30 @@ $(function() {
   //////////////////////////////////////////
   //event listeners
   //////////////////////////////////////////
+  //CHOOSE RANDOM CORRECT ANSWER
+  var randomCorrect = function (state, elements) {
+    var number = Math.floor(Math.random() * 3);
+  }
+
+  //Generate one random color
+  var randomColor = function (state) {
+    var colorCode = [];
+    for (var i = 0; i <3; i++) {
+      var number = Math.floor(Math.random() * 250);
+      colorCode.push(number);
+    }
+    return colorCode;
+  }
+
+  //get three random RGB codes
+  var randomChoices = function (state) {
+    var colorCode = [];
+    for (var i = 0; i <3; i++) {
+      var number = randomColor();
+      colorCode.push(number);
+    }
+    return colorCode;
+  }
 
   function startButton (state) {
     $('button.start').click(function () {

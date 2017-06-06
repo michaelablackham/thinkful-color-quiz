@@ -27,8 +27,8 @@ $(function() {
 
   var choicesTemplate = [
     '<div class="options--input" style="background-color: rgba(@color);">',
-      '<input type="radio" id="input@index" name="input">',
-      '<label for="input@index">Color @index</label>',
+      '<input type="radio" data-item-id="@index" name="input">',
+      '<label for="@index">Color @index</label>',
     '</div>'
   ].join('');
 
@@ -41,6 +41,13 @@ $(function() {
   //////////////////////////////////////////
   //state modification functions
   //////////////////////////////////////////
+
+  //set current progress item
+  function currentProgress (state) {
+    var currentQuestion = state.currentQuestion - 1;
+    $('.pager li').eq(currentQuestion).addClass("active");
+    console.log(state.currentQuestion)
+  }
 
   //set the initial currentPage
   function setCurrentPage(state, currentPage) {
@@ -98,18 +105,22 @@ $(function() {
     startButton(state);
   };
 
-  function createQuestion (state) {
+  function renderQuestion (state) {
     pushQuestionInfo(state);
     $('h2.question .color span').text(state.question.choices[1]);
+    currentProgress(state);
+    applyColors(state);
   }
 
   //Apply colors to options
   var applyColors = function (state) {
     var choicesHTML = '';
+    console.log('test1')
 
     state.question.forEach(function(index){
-      var choiceHTML = choicesTemplate.replace('@index', index);
+      var choiceHTML = choicesTemplate.replace('@index', '1');
       choicesHTML += choiceHTML;
+      console.log('test')
     });
 
     $('.options').html(choicesHTML);
@@ -120,10 +131,7 @@ $(function() {
   //////////////////////////////////////////
   function questionPage (state) {
     state.currentQuestion++;
-    // pushQuestionInfo(state);
-    createQuestion(state);
-    // applyColors(state);
-    console.log(state)
+    renderQuestion(state);
   };
 
   function renderQuiz(state, elements) {

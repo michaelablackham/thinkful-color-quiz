@@ -132,6 +132,13 @@ $(function() {
     }
   }
 
+  // add active class to option item
+  $(".options").on( "click", "input", function () {
+    $(".options--input").removeClass('active');
+    $(this).parent().addClass('active');
+    console.log("click")
+  });
+
   //////////////////////////////////////////
   // event listeners
   //////////////////////////////////////////

@@ -1,12 +1,16 @@
 $(function() {
   'use strict';
+
   //////////////////////////////////////////
   // object state
   //////////////////////////////////////////
+
   var state = {
     question: [],
-    correctText: '(งツ)ว',
-    wrongText: '(╯°□°）╯︵ ┻━┻',
+    correctEmoji: '(งツ)ว',
+    correctText: 'Great job! You must live ina  world of rainbows and unicorns!',
+    wrongEmoji: '(╯°□°）╯︵ ┻━┻',
+    wrongText: 'Seriously? Is your favorite color black like your soul?',
     score: 0,
     currentQuestion: 0,
     currentPage: 'pageStart',
@@ -18,7 +22,6 @@ $(function() {
   //////////////////////////////////////////
 
   var SECTION_ELEMENTS = {
-    // 'pageHeader':  $('#page-header'),
     'pageStart':  $('#page-start'),
     'pageQuestion':  $('#page-question'),
     'pageAnswer':  $('#page-answer'),
@@ -98,6 +101,7 @@ $(function() {
       choicesHTML += choiceHTML;
       index++;
     });
+
     $('.options').html(choicesHTML);
   };
 
@@ -107,11 +111,10 @@ $(function() {
   function questionPage (state) {
     state.currentQuestion++;
     renderQuestion(state);
-    console.log(state);
   }
 
   function renderQuiz(state, elements) {
-    // default to hiding all routes, then show the current route
+    // default to hiding all current page, then show the currentpage
     Object.keys(elements).forEach(function (currentPage) {
       elements[currentPage].hide();
     });
@@ -136,7 +139,6 @@ $(function() {
   $(".options").on( "click", "input", function () {
     $(".options--input").removeClass('active');
     $(this).parent().addClass('active');
-    console.log("click")
   });
 
   //////////////////////////////////////////

@@ -50,6 +50,7 @@ $(function() {
   // set current progress item
   function currentProgress(state) {
     var currentQuestion = state.currentQuestion - 1;
+    console.log({currentQuestion:currentQuestion});
     $('.pager li').eq(currentQuestion).addClass("current");
   }
 
@@ -81,8 +82,10 @@ $(function() {
 
   // Push colors to state
   function pushQuestionInfo(state) {
-    state.question.choices = randomChoices();
-    state.question.answer = randomCorrect();
+    var randomRGBData = App.RandomRGB()
+
+    state.question.choices = randomRGBData.choices
+    state.question.answer = randomRGBData.correctAnswer
   }
 
   function startPage(state, element) {
@@ -91,25 +94,27 @@ $(function() {
   }
 
   function renderQuestion(state) {
+    App.createQuestion();
+
     pushQuestionInfo(state);
-    createQuestionText(state);
+    // createQuestionText(state);
     currentProgress(state);
-    applyColors(state);
+    // applyColors(state);
   }
 
-  // Apply colors to options
-  var applyColors = function (state) {
-    var choicesHTML = '';
-    var index = 0;
-
-    state.question.choices.forEach(function () {
-      var choiceHTML = choicesTemplate.replace('@color', state.question.choices[index]);
-      choicesHTML += choiceHTML;
-      index++;
-    });
-
-    $('.options').html(choicesHTML);
-  };
+  // // Apply colors to options
+  // var applyColors = function (state) {
+  //   var choicesHTML = '';
+  //   var index = 0;
+  //
+  //   state.question.choices.forEach(function () {
+  //     var choiceHTML = choicesTemplate.replace('@color', state.question.choices[index]);
+  //     choicesHTML += choiceHTML;
+  //     index++;
+  //   });
+  //
+  //   $('.options').html(choicesHTML);
+  // };
 
   //////////////////////////////////////////
   // functions that render state
@@ -155,40 +160,41 @@ $(function() {
   // event listeners
   //////////////////////////////////////////
 
-  // Add "correct color" to question text
-  function createQuestionText(state) {
-    $('h2.question .color span').text(state.question.choices[state.question.answer]);
-  }
+  // // Add "correct color" to question text
+  // function createQuestionText(state) {
+  //   $('h2.question .color span').text(state.question.choices[state.question.answer]);
+  // }
 
-  // CHOOSE RANDOM CORRECT ANSWER
-  var randomCorrect = function (state, elements) {
-    return Math.floor(Math.random() * 3);
-  };
-
-  // Generate one random color
-  var randomColor = function (state) {
-    var colorCode = [];
-    for (var i = 0; i < 3; i++) {
-      var number = Math.floor(Math.random() * 250);
-      colorCode.push(number);
-    }
-    return colorCode;
-  };
-
-  // get three random RGB codes
-  var randomChoices = function (state) {
-    var colorCode = [];
-    for (var i = 0; i < 3; i++) {
-      var number = randomColor();
-      colorCode.push(number);
-    }
-    return colorCode;
-  };
+  // // CHOOSE RANDOM CORRECT ANSWER
+  // var randomCorrect = function (state, elements) {
+  //   return Math.floor(Math.random() * 3);
+  // };
+  //
+  // // Generate one random color
+  // var randomColor = function (state) {
+  //   var colorCode = [];
+  //   for (var i = 0; i < 3; i++) {
+  //     var number = Math.floor(Math.random() * 250);
+  //     colorCode.push(number);
+  //   }
+  //   return colorCode;
+  // };
+  //
+  // // get three random RGB codes
+  // var randomChoices = function (state) {
+  //   var colorCode = [];
+  //   for (var i = 0; i < 3; i++) {
+  //     var number = randomColor();
+  //     colorCode.push(number);
+  //   }
+  //   return colorCode;
+  // };
 
 
   $("form[name='current-question']").submit(function(event) {
     event.preventDefault();
     var answer = $("input:checked").parent().parent().index();
+    console.log(answer, 'correct answer'+state.question.answer)
     if ( answer === state.question.answer ) {
       console.log("correct!")
       $('#page-answer h2').text(state.correctEmoji);

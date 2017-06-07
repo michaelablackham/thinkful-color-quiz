@@ -179,16 +179,21 @@ h2 {
   h2 > span {
     opacity: .3; }
 
-#page-answer h2 {
-  font-size: 3em;
-  font-weight: normal;
-  letter-spacing: 0; }
-
 h3 {
   display: inline-block;
   margin: 0 20px 0;
   position: relative;
   top: -10px; }
+
+#page-answer h2 {
+  font-size: 3.5em;
+  font-weight: 300;
+  letter-spacing: 0; }
+
+#page-answer h3 {
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: 0; }
 
 @keyframes colorchange {
   0% {

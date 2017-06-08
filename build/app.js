@@ -77,6 +77,7 @@ $(function() {
   }
 
   function reset(state) {
+    state.question = [];
     state.score = 0;
     state.currentQuestion = 0;
     state.lastCorrect = false;
@@ -92,6 +93,7 @@ $(function() {
     else {
       setCurrentPage(state, 'pageQuestion');
     }
+
     renderQuiz(state, SECTION_ELEMENTS);
   }
 
@@ -272,7 +274,6 @@ $(function() {
     $(".next").click(function(event){
       event.preventDefault();
       advance(state, SECTION_ELEMENTS);
-      console.log("test")
     });
   }
 

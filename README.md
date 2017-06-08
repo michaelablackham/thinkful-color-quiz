@@ -52,7 +52,7 @@
 - [ ] advance to new question
   - [ ] if questionCount !== 5
   - [ ] add ++ to questionCount
-  - [ ] add right or wrong to pager
+  - [x] add right or wrong to pager
 - [ ] final result page
   - [ ] appears after question count === 5
   - [ ] shows number right vs wrongText

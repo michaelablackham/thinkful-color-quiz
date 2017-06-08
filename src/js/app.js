@@ -43,6 +43,8 @@ $(function() {
   //   '</li>'
   // ].join('');
 
+  var progressIcon = '<i class="fa fa-@check" aria-hidden="true"></i>';
+
   //////////////////////////////////////////
   // state modification functions
   //////////////////////////////////////////
@@ -50,7 +52,20 @@ $(function() {
   // set current progress item
   function currentProgress(state) {
     var currentQuestion = state.currentQuestion - 1;
+    console.log({currentQuestion:currentQuestion});
     $('.pager li').eq(currentQuestion).addClass("current");
+  }
+
+  function progressCheck(state) {
+    var currentQuestion = state.currentQuestion -1;
+    $('.pager li').eq(currentQuestion).removeClass('current');
+    if (state.lastCorrect === true) {
+      $('.pager li').eq(currentQuestion).addClass("correct");
+      $('.pager li').eq(currentQuestion).append(progressIcon.replace('@check', 'check'));
+    } else {
+      $('.pager li').eq(currentQuestion).addClass("incorrect");
+      $('.pager li').eq(currentQuestion).append(progressIcon.replace('@check', 'close'));
+    }
   }
 
   // set the initial currentPage
@@ -64,7 +79,7 @@ $(function() {
     setCurrentPage(state, 'pageStart');
   }
 
-  function advance(state) {
+  function advance(state, currentPage, SECTION_ELEMENTS) {
     state.currentQuestion++;
     if (state.currentQuestion === 5) {
       currentPage(state, 'pageResult');
@@ -79,48 +94,14 @@ $(function() {
 
   }
 
-  // Push colors to state
-  function pushQuestionInfo(state) {
-    state.question.choices = randomChoices();
-    state.question.answer = randomCorrect();
-  }
-
-  function startPage(state, element) {
-    startButton(state);
-    // resetButton(state);
-  }
-
-  function renderQuestion(state) {
-    pushQuestionInfo(state);
-    createQuestionText(state);
-    currentProgress(state);
-    applyColors(state);
-  }
-
-  // Apply colors to options
-  var applyColors = function (state) {
-    var choicesHTML = '';
-    var index = 0;
-
-    state.question.choices.forEach(function () {
-      var choiceHTML = choicesTemplate.replace('@color', state.question.choices[index]);
-      choicesHTML += choiceHTML;
-      index++;
-    });
-
-    $('.options').html(choicesHTML);
-  };
-
   //////////////////////////////////////////
   // functions that render state
   //////////////////////////////////////////
-  function questionPage (state) {
-    state.currentQuestion++;
-    renderQuestion(state);
-  }
+
 
   function answerPage (state) {
     console.log("answer");
+    nextButton(state);
   }
 
   function renderQuiz(state, elements) {
@@ -145,28 +126,65 @@ $(function() {
     }
   }
 
-  // add active class to option item
-  $(".options").on( "click", "input", function () {
-    $(".options--input").removeClass('active');
-    $(this).parent().addClass('active');
-  });
+  //////////////////////////////////////////
+  // RENDER QUESTIONS
+  //////////////////////////////////////////
+  function renderQuestion(state) {
+    // App.createQuestion();
+    pushQuestionInfo(state);
+    createQuestionText(state);
+    currentProgress(state);
+    applyColors(state);
+  }
+
+  function questionPage (state) {
+    state.currentQuestion++;
+    renderQuestion(state);
+  }
 
   //////////////////////////////////////////
-  // event listeners
-  //////////////////////////////////////////
+  // CREATE QUESTIONS
+  /////////////////////////////////////////
+  // Push colors to state
+  function pushQuestionInfo(state) {
+    // var randomRGBData = App.RandomRGB()
+
+    // state.question.choices = randomRGBData.choices
+    // state.question.answer = randomRGBData.correctAnswer
+    state.question.choices = randomChoices();
+    state.question.answer = randomCorrect();
+  }
 
   // Add "correct color" to question text
   function createQuestionText(state) {
     $('h2.question .color span').text(state.question.choices[state.question.answer]);
   }
 
+  // Apply colors to options
+  function applyColors (state) {
+    var choicesHTML = '';
+    var index = 0;
+
+    state.question.choices.forEach(function () {
+      var choiceHTML = choicesTemplate.replace('@color', state.question.choices[index]);
+      choicesHTML += choiceHTML;
+      index++;
+    });
+
+    $('.options').html(choicesHTML);
+  };
+
+
+  //////////////////////////////////////////
+  // CREATE RGB COLORS
+  //////////////////////////////////////////
   // CHOOSE RANDOM CORRECT ANSWER
-  var randomCorrect = function (state, elements) {
+  function randomCorrect (state, elements) {
     return Math.floor(Math.random() * 3);
   };
 
   // Generate one random color
-  var randomColor = function (state) {
+  function randomColor (state) {
     var colorCode = [];
     for (var i = 0; i < 3; i++) {
       var number = Math.floor(Math.random() * 250);
@@ -176,7 +194,7 @@ $(function() {
   };
 
   // get three random RGB codes
-  var randomChoices = function (state) {
+  function randomChoices (state) {
     var colorCode = [];
     for (var i = 0; i < 3; i++) {
       var number = randomColor();
@@ -185,24 +203,40 @@ $(function() {
     return colorCode;
   };
 
+  //////////////////////////////////////////
+  // CHECKING USER ANSWER TO CORRECT ANSWER
+  //////////////////////////////////////////
+  // add active class to option item
+  $(".options").on( "click", "input", function () {
+    $(".options--input").removeClass('active');
+    $(this).parent().addClass('active');
+  });
 
   $("form[name='current-question']").submit(function(event) {
     event.preventDefault();
     var answer = $("input:checked").parent().parent().index();
     if ( answer === state.question.answer ) {
-      console.log("correct!")
       $('#page-answer h2').text(state.correctEmoji);
       $('#page-answer h3').text(state.correctText);
-      // state.lastCorrect = 'true'
+      state.lastCorrect = true;
     } else {
-      console.log("WRRRONNNGG!")
       $('#page-answer h2').text(state.wrongEmoji);
       $('#page-answer h3').text(state.wrongText);
+      state.lastCorrect = false;
     }
 
     setCurrentPage(state, 'pageAnswer');
+    progressCheck(state);
     renderQuiz(state, SECTION_ELEMENTS);
   });
+
+  //////////////////////////////////////////
+  // BUTTON CLICKS
+  //////////////////////////////////////////
+  function startPage(state, element) {
+    startButton(state);
+    // resetButton(state);
+  }
 
   function startButton(state) {
     $('button.start').click(function () {
@@ -210,6 +244,15 @@ $(function() {
       setCurrentPage(state, 'pageQuestion');
       renderQuiz(state, SECTION_ELEMENTS);
       $('.pager').fadeIn();
+    });
+  }
+
+  function nextButton(state, PAGE_ELEMENTS) {
+    $(".next").click(function(event){
+      event.preventDefault();
+      advance(state, PAGE_ELEMENTS);
+      // setCurrentPage(state, 'pageQuestion');
+      renderQuiz(state, PAGE_ELEMENTS);
     });
   }
 

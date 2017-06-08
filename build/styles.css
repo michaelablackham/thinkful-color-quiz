@@ -186,6 +186,7 @@ h3 {
   top: -10px; }
 
 #page-answer h2 {
+<<<<<<< HEAD
   font-size: 3em;
   font-weight: normal;
   letter-spacing: 0; }
@@ -195,6 +196,16 @@ h3 {
   font-weight: normal;
   letter-spacing: 0;
   text-transform: none; }
+=======
+  font-size: 3.5em;
+  font-weight: 300;
+  letter-spacing: 0; }
+
+#page-answer h3 {
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: 0; }
+>>>>>>> c018703ba9b8e6bec30e8c0f3e8d39dc2a0686f5
 
 @keyframes colorchange {
   0% {

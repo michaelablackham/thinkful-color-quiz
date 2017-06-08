@@ -18,8 +18,8 @@
 - [x] current question count
 - [x] current page
 - [x] last correct answer (boolean)
-- [ ] randomly chosen color (color to guess - default = false)
-- [ ] randomly chosen color (for 2 extra options)
+- [x] randomly chosen color (color to guess - default = false)
+- [x] randomly chosen color (for 2 extra options)
 
 ## Tasks
 
@@ -31,22 +31,22 @@
 - [ ] start Quiz
   - [x] background color change
   - [x] pulsing button
-  - [ ] start button click
-    - [ ] home screen fades out and question section appears
+  - [x] start button click
+    - [x] home screen fades out and question section appears
     - [x] header gets smaller and goes to top of page
     - [x] add class "active" to header
     - [x] remove class "home" from body
-    - [ ] pager appears
-- [ ] questions
-  - [ ] randomly choose a color to guess from state
-  - [ ] add this value to question and to one randomly chosen input (1 of 3)
-  - [ ] randomly choose 2 other RGB values and add to remaining inputs
-  - [ ] submit question on button click
-  - [ ] check if answer is correct
+    - [x] pager appears
+- [x] questions
+  - [x] randomly choose a color to guess from state
+  - [x] add this value to question and to one randomly chosen input (1 of 3)
+  - [x] randomly choose 2 other RGB values and add to remaining inputs
+  - [x] submit question on button click
+  - [x] check if answer is correct
 - [ ] answer screen
   - [ ] generate correct or wrong screen with text and correct answer
-  - [ ] add right or wrong styling to pager
-  - [ ] keep track of right/wrong answers
+  - [x] add right or wrong styling to pager
+  - [x] keep track of right/wrong answers
   - [ ] add "current" class to the current number pager that correlates to current question
 - [ ] advance to new question
   - [ ] if questionCount !== 5
@@ -57,3 +57,6 @@
   - [ ] shows number right vs wrongText
 - [ ] restart
   - [ ] click on "start over" and go back to home and set all state objects back to defaults
+  - [x] hide start over button
+  - [x] hide and reset pager
+  - [x] header/title on load

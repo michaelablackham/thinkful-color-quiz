@@ -8,9 +8,19 @@ $(function() {
   var state = {
     question: [],
     correctEmoji: '(งツ)ว',
-    correctText: 'Great job! You must live in a  world of rainbows and unicorns!',
+    correctText: [
+      'Great job! You must live in a  world of rainbows and unicorns!',
+      'Did you really know the answer? Or did you just pick your favorite color?',
+      'Yassss queeeen. You got it',
+      "Taste the rainbow bitches"
+    ],
     wrongEmoji: '(╯°□°）╯︵ ┻━┻',
-    wrongText: 'Seriously? Is your favorite color black, like your soul?',
+    wrongText: [
+      'Seriously? Is your favorite color black, like your soul?',
+      'Uuuuugggghhhhhhhhh',
+      'The world is a sad place because of your color choice',
+      '50 shades of GRAY must be your favorite book....'
+    ],
     score: 0,
     currentQuestion: 0,
     currentPage: 'pageStart',
@@ -69,6 +79,7 @@ $(function() {
   function reset(state) {
     state.score = 0;
     state.currentQuestion = 0;
+    state.lastCorrect = false;
     setCurrentPage(state, 'pageStart');
     console.log(state)
   }
@@ -121,10 +132,21 @@ $(function() {
   }
 
   //////////////////////////////////////////
+  // RENDER ANSWERS
+  //////////////////////////////////////////
+
+  function randomPraise () {
+    return Math.floor(Math.random() * 4);
+  };
+
+  function randomWrong () {
+    return Math.floor(Math.random() * 4);
+  };
+
+  //////////////////////////////////////////
   // RENDER QUESTIONS
   //////////////////////////////////////////
   function renderQuestion(state) {
-    // App.createQuestion();
     pushQuestionInfo(state);
     createQuestionText(state);
     currentProgress(state);
@@ -132,7 +154,6 @@ $(function() {
   }
 
   function questionPage (state) {
-    // state.currentQuestion++;
     renderQuestion(state);
   }
 
@@ -209,25 +230,29 @@ $(function() {
   $("form[name='current-question']").submit(function(event) {
     event.preventDefault();
     var answer = $("input:checked").parent().parent().index();
-    if ( answer === state.question.answer ) {
-      $('#page-answer h2').text(state.correctEmoji);
-      $('#page-answer h3').text(state.correctText);
-      state.lastCorrect = true;
-    } else {
-      $('#page-answer h2').text(state.wrongEmoji);
-      $('#page-answer h3').text(state.wrongText);
-      state.lastCorrect = false;
+    if( $(".options--input").hasClass("active") ){
+      if ( answer === state.question.answer ) {
+        $('#page-answer h2').text(state.correctEmoji);
+        $('#page-answer h3').text(state.correctText[randomPraise()]);
+        state.lastCorrect = true;
+      } else {
+        $('#page-answer h2').text(state.wrongEmoji);
+        $('#page-answer h3').text(state.wrongText[randomWrong()]);
+        state.lastCorrect = false;
+      }
+      setCurrentPage(state, 'pageAnswer');
+      progressCheck(state);
+      renderQuiz(state, SECTION_ELEMENTS);
     }
-
-    setCurrentPage(state, 'pageAnswer');
-    progressCheck(state);
-    renderQuiz(state, SECTION_ELEMENTS);
+    else {
+      alert("Don't give up now. At least choose your favorite color out of these three!");
+    }
   });
 
   //////////////////////////////////////////
   // BUTTON CLICKS
   //////////////////////////////////////////
-  function startPage(state, element) {
+  function startPage(state, elements) {
     startButton(state);
     $('body').addClass('home').removeClass('active');
     $('.pager, .reset').fadeOut();
@@ -243,10 +268,11 @@ $(function() {
     });
   }
 
-  function nextButton(state, SECTION_ELEMENTS) {
+  function nextButton(state, elements, SECTION_ELEMENTS) {
     $(".next").click(function(event){
       event.preventDefault();
       advance(state, SECTION_ELEMENTS);
+      console.log("test")
     });
   }
 

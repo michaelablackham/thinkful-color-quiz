@@ -28,7 +28,7 @@
   - [x] set the current page to start (on load)
   - [x] this is based off of the currentPage object that gets assigned depending on which number we are on
   - [ ] call a function for what happens on each page depending on the currentPage object
-- [ ] start Quiz
+- [x] start Quiz
   - [x] background color change
   - [x] pulsing button
   - [x] start button click
@@ -43,11 +43,12 @@
   - [x] randomly choose 2 other RGB values and add to remaining inputs
   - [x] submit question on button click
   - [x] check if answer is correct
-- [ ] answer screen
-  - [ ] generate correct or wrong screen with text and correct answer
+- [x] answer screen
+  - [x] should only appear if user clicks a color
+  - [x] generate correct or wrong screen with text and correct answer
   - [x] add right or wrong styling to pager
   - [x] keep track of right/wrong answers
-  - [ ] add "current" class to the current number pager that correlates to current question
+  - [x] add "current" class to the current number pager that correlates to current question
 - [ ] advance to new question
   - [ ] if questionCount !== 5
   - [ ] add ++ to questionCount
@@ -55,8 +56,8 @@
 - [ ] final result page
   - [ ] appears after question count === 5
   - [ ] shows number right vs wrongText
-- [ ] restart
-  - [ ] click on "start over" and go back to home and set all state objects back to defaults
+- [x] restart
+  - [x] click on "start over" and go back to home and set all state objects back to defaults
   - [x] hide start over button
   - [x] hide and reset pager
   - [x] header/title on load

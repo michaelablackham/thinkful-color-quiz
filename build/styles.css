@@ -179,16 +179,22 @@ h2 {
   h2 > span {
     opacity: .3; }
 
-#page-answer h2 {
-  font-size: 3em;
-  font-weight: normal;
-  letter-spacing: 0; }
-
 h3 {
   display: inline-block;
   margin: 0 20px 0;
   position: relative;
   top: -10px; }
+
+#page-answer h2 {
+  font-size: 3em;
+  font-weight: normal;
+  letter-spacing: 0; }
+
+#page-answer h3 {
+  font-size: 1em;
+  font-weight: normal;
+  letter-spacing: 0;
+  text-transform: none; }
 
 @keyframes colorchange {
   0% {

@@ -76,17 +76,9 @@ $(function() {
     state.currentPage = currentPage;
   }
 
-  function reset(state) {
-    state.question = [];
-    state.score = 0;
-    state.currentQuestion = 0;
-    state.lastCorrect = false;
-    setCurrentPage(state, 'pageStart');
-    console.log(state)
-  }
-
   function advance(state) {
     state.currentQuestion++;
+    console.log(state)
     if (state.currentQuestion === 5) {
       setCurrentPage(state, 'pageResult');
     }
@@ -97,45 +89,31 @@ $(function() {
     renderQuiz(state);
   }
 
-  function answerQuestion(state) {
-    var currentQuestion = state.currentQuestion;
-
-  }
-
   //////////////////////////////////////////
   // functions that render state
   //////////////////////////////////////////
 
 
-  function answerPage (state) {
+  //////////////////////////////////////////
+  // RENDER RESULTS
+  //////////////////////////////////////////
+  function resultsPage (state) {
     nextButton(state);
-  }
-
-  function renderQuiz(state) {
-    // default to hiding all current page, then show the currentpage
-    Object.keys(SECTION_ELEMENTS).forEach(function (currentPage) {
-      SECTION_ELEMENTS[currentPage].hide();
-    });
-
-    SECTION_ELEMENTS[state.currentPage].show();
-
-    if (state.currentPage === 'pageStart') {
-      startPage(state, SECTION_ELEMENTS[state.currentPage]);
-    }
-    else if (state.currentPage === 'pageQuestion') {
-      questionPage(state, SECTION_ELEMENTS[state.currentPage]);
-    }
-    else if (state.currentPage === 'pageAnswer') {
-      answerPage(state, SECTION_ELEMENTS[state.currentPage]);
-    }
-    else if (state.currentPage === 'pageResult') {
-      resultsPage(state, SECTION_ELEMENTS[state.currentPage]);
-    }
   }
 
   //////////////////////////////////////////
   // RENDER ANSWERS
   //////////////////////////////////////////
+  function answerQuestion(state) {
+    var currentQuestion = state.currentQuestion;
+  }
+
+  function answerPage (state) {
+    if (state.currentQuestion >= 4) {
+      $(".next").text("See Final Results");
+    }
+    nextButton(state);
+  }
 
   function randomPraise () {
     return Math.floor(Math.random() * 4);
@@ -277,14 +255,49 @@ $(function() {
     });
   }
 
+  //RESET BUTTON
+  function reset(state) {
+    state.question = [];
+    state.score = 0;
+    state.currentQuestion = 0;
+    state.lastCorrect = false;
+    setCurrentPage(state, 'pageStart');
+    console.log(state)
+  }
+
   $(".reset").click(function(event){
     event.preventDefault();
     reset(state);
     renderQuiz(state);
   });
 
+  //////////////////////////////////////////
+  // RENDER ENTIRE QUIZ
+  //////////////////////////////////////////
+  function renderQuiz(state) {
+    // default to hiding all current page, then show the currentpage
+    Object.keys(SECTION_ELEMENTS).forEach(function (currentPage) {
+      SECTION_ELEMENTS[currentPage].hide();
+    });
+
+    SECTION_ELEMENTS[state.currentPage].show();
+
+    if (state.currentPage === 'pageStart') {
+      startPage(state, SECTION_ELEMENTS[state.currentPage]);
+    }
+    else if (state.currentPage === 'pageQuestion') {
+      questionPage(state, SECTION_ELEMENTS[state.currentPage]);
+    }
+    else if (state.currentPage === 'pageAnswer') {
+      answerPage(state, SECTION_ELEMENTS[state.currentPage]);
+    }
+    else if (state.currentPage === 'pageResult') {
+      resultsPage(state, SECTION_ELEMENTS[state.currentPage]);
+    }
+  }
+
   $(function () {
     renderQuiz(state);
-
+    console.log("current Question" + state.currentQuestion)
   });
 });

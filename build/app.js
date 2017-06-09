@@ -98,7 +98,7 @@ $(function() {
   // RENDER RESULTS
   //////////////////////////////////////////
   function resultsPage (state) {
-    
+
   }
 
   //////////////////////////////////////////
@@ -261,6 +261,7 @@ $(function() {
     state.score = 0;
     state.currentQuestion = 0;
     state.lastCorrect = false;
+    $('.pager li').removeClass('current').removeClass('correct').removeClass('incorrect');
     setCurrentPage(state, 'pageStart');
     console.log(state)
   }

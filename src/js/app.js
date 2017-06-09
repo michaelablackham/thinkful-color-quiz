@@ -85,7 +85,7 @@ $(function() {
     console.log(state)
   }
 
-  function advance(state, SECTION_ELEMENTS) {
+  function advance(state) {
     state.currentQuestion++;
     if (state.currentQuestion === 5) {
       setCurrentPage(state, 'pageResult');
@@ -94,7 +94,7 @@ $(function() {
       setCurrentPage(state, 'pageQuestion');
     }
 
-    renderQuiz(state, SECTION_ELEMENTS);
+    renderQuiz(state);
   }
 
   function answerQuestion(state) {
@@ -111,25 +111,25 @@ $(function() {
     nextButton(state);
   }
 
-  function renderQuiz(state, elements) {
+  function renderQuiz(state) {
     // default to hiding all current page, then show the currentpage
-    Object.keys(elements).forEach(function (currentPage) {
-      elements[currentPage].hide();
+    Object.keys(SECTION_ELEMENTS).forEach(function (currentPage) {
+      SECTION_ELEMENTS[currentPage].hide();
     });
 
-    elements[state.currentPage].show();
+    SECTION_ELEMENTS[state.currentPage].show();
 
     if (state.currentPage === 'pageStart') {
-      startPage(state, elements[state.currentPage]);
+      startPage(state, SECTION_ELEMENTS[state.currentPage]);
     }
     else if (state.currentPage === 'pageQuestion') {
-      questionPage(state, elements[state.currentPage]);
+      questionPage(state, SECTION_ELEMENTS[state.currentPage]);
     }
     else if (state.currentPage === 'pageAnswer') {
-      answerPage(state, elements[state.currentPage]);
+      answerPage(state, SECTION_ELEMENTS[state.currentPage]);
     }
     else if (state.currentPage === 'pageResult') {
-      resultsPage(state, elements[state.currentPage]);
+      resultsPage(state, SECTION_ELEMENTS[state.currentPage]);
     }
   }
 
@@ -244,7 +244,7 @@ $(function() {
       }
       setCurrentPage(state, 'pageAnswer');
       progressCheck(state);
-      renderQuiz(state, SECTION_ELEMENTS);
+      renderQuiz(state);
     }
     else {
       alert("Don't give up now. At least choose your favorite color out of these three!");
@@ -265,26 +265,26 @@ $(function() {
     $('button.start').click(function () {
       $('body').removeClass('home').addClass('active');
       setCurrentPage(state, 'pageQuestion');
-      renderQuiz(state, SECTION_ELEMENTS);
+      renderQuiz(state);
       $('.pager, .reset').fadeIn();
     });
   }
 
-  function nextButton(state, elements, SECTION_ELEMENTS) {
+  function nextButton(state, elements) {
     $(".next").click(function(event){
       event.preventDefault();
-      advance(state, SECTION_ELEMENTS);
+      advance(state);
     });
   }
 
   $(".reset").click(function(event){
     event.preventDefault();
     reset(state);
-    renderQuiz(state, SECTION_ELEMENTS);
+    renderQuiz(state);
   });
 
   $(function () {
-    renderQuiz(state, SECTION_ELEMENTS);
+    renderQuiz(state);
 
   });
 });

@@ -98,7 +98,7 @@ $(function() {
   // RENDER RESULTS
   //////////////////////////////////////////
   function resultsPage (state) {
-    nextButton(state);
+    
   }
 
   //////////////////////////////////////////

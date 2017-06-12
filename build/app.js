@@ -93,18 +93,13 @@ $(function() {
     else {
       setCurrentPage(state, 'pageQuestion');
     }
-
     renderQuiz(state);
   }
 
   //////////////////////////////////////////
-  // functions that render state
-  //////////////////////////////////////////
-
-
-  //////////////////////////////////////////
   // RENDER RESULTS
   //////////////////////////////////////////
+
   function resultsPage (state) {
 
   }
@@ -112,12 +107,9 @@ $(function() {
   //////////////////////////////////////////
   // RENDER ANSWERS
   //////////////////////////////////////////
-  function answerQuestion(state) {
-    var currentQuestion = state.currentQuestion;
-  }
 
   function answerPage (state) {
-    if (state.currentQuestion >= 4) {
+    if (state.currentQuestion === 5) {
       $(".next").text("See Final Results");
     }
     nextButton(state);
@@ -138,6 +130,7 @@ $(function() {
     pushQuestionInfo(state);
     createQuestionText(state);
     currentProgress(state);
+    // progressCheck(state);
     applyColors(state);
   }
 
@@ -150,10 +143,6 @@ $(function() {
   /////////////////////////////////////////
   // Push colors to state
   function pushQuestionInfo(state) {
-    // var randomRGBData = App.RandomRGB()
-
-    // state.question.choices = randomRGBData.choices
-    // state.question.answer = randomRGBData.correctAnswer
     state.question.choices = randomChoices();
     state.question.answer = randomCorrect();
   }
@@ -210,16 +199,16 @@ $(function() {
   // CHECKING USER ANSWER TO CORRECT ANSWER
   //////////////////////////////////////////
   // add active class to option item
-  $(".options").on( "click", "input", function () {
-    $(".options--input").removeClass('active');
+  $('.options').on( 'click', 'input', function () {
+    $('.options--input').removeClass('active');
     $(this).parent().addClass('active');
   });
 
-  $("form[name='current-question']").submit(function(event) {
+  $('form[name="current-question"]').submit(function (event) {
     event.preventDefault();
-    var answer = $("input:checked").parent().parent().index();
-    if( $(".options--input").hasClass("active") ){
-      if ( answer === state.question.answer ) {
+    var answer = $('input:checked').parent().parent().index();
+    if($('.options--input').hasClass('active')) {
+      if (answer === state.question.answer) {
         $('#page-answer h2').text(state.correctEmoji);
         $('#page-answer h3').text(state.correctText[randomPraise()]);
         state.lastCorrect = true;
@@ -257,7 +246,7 @@ $(function() {
   }
 
   function nextButton(state, elements) {
-    $(".next").click(function(event){
+    $('.next').click(function (event) {
       event.preventDefault();
       advance(state);
     });

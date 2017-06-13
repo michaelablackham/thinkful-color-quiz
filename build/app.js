@@ -39,13 +39,6 @@ $(function() {
   // Variables
   //////////////////////////////////////////
 
-  var SECTION_ELEMENTS = {
-    'pageStart':  $('#page-start'),
-    'pageQuestion':  $('#page-question'),
-    'pageAnswer':  $('#page-answer'),
-    'pageResult':  $('#page-results')
-  }
-
   var choicesTemplate = [
     '<div class="options--choice">',
     '<div class="options--input" style="background-color: rgb( @color );">',
@@ -57,36 +50,34 @@ $(function() {
 
   var progressIcon = '<i class="fa fa-@check" aria-hidden="true"></i>';
 
-  //////////////////////////////////////////
-  // state modification functions
-  //////////////////////////////////////////
-
   // set current progress item
   function currentProgress(state) {
     var currentQuestion = state.currentQuestion;
-    $('.pager li').eq(currentQuestion).addClass("current");
+    $('.pager li').eq(currentQuestion).addClass('current');
   }
 
   function progressCheck(state) {
     var currentQuestion = state.currentQuestion;
     $('.pager li').eq(currentQuestion).removeClass('current');
     if (state.lastCorrect === true) {
+      // state.score++;
       $('.pager li').eq(currentQuestion).addClass("correct");
       $('.pager li').eq(currentQuestion).append(progressIcon.replace('@check', 'check'));
-    } else {
-      $('.pager li').eq(currentQuestion).addClass("incorrect");
+    }
+    else {
+      $('.pager li').eq(currentQuestion).addClass('incorrect');
       $('.pager li').eq(currentQuestion).append(progressIcon.replace('@check', 'close'));
     }
   }
 
-  // set the initial currentPage
+// set the initial currentPage
   function setCurrentPage(state, currentPage) {
     state.currentPage = currentPage;
   }
 
+// ADVANCE FROM ANSWERS TO QUESTIONS/RESULTS PAGE
   function advance(state) {
     state.currentQuestion++;
-    console.log(state)
     if (state.currentQuestion === 5) {
       setCurrentPage(state, 'pageResult');
     }
@@ -130,7 +121,6 @@ $(function() {
     pushQuestionInfo(state);
     createQuestionText(state);
     currentProgress(state);
-    // progressCheck(state);
     applyColors(state);
   }
 
@@ -141,6 +131,7 @@ $(function() {
   //////////////////////////////////////////
   // CREATE QUESTIONS
   /////////////////////////////////////////
+
   // Push colors to state
   function pushQuestionInfo(state) {
     state.question.choices = randomChoices();
@@ -171,29 +162,29 @@ $(function() {
   // CREATE RGB COLORS
   //////////////////////////////////////////
   // CHOOSE RANDOM CORRECT ANSWER
-  function randomCorrect (state, elements) {
+  function randomCorrect(state, elements) {
     return Math.floor(Math.random() * 3);
-  };
+  }
 
   // Generate one random color
-  function randomColor (state) {
+  function randomColor(state) {
     var colorCode = [];
     for (var i = 0; i < 3; i++) {
       var number = Math.floor(Math.random() * 250);
       colorCode.push(number);
     }
     return colorCode;
-  };
+  }
 
   // get three random RGB codes
-  function randomChoices (state) {
+  function randomChoices(state) {
     var colorCode = [];
     for (var i = 0; i < 3; i++) {
       var number = randomColor();
       colorCode.push(number);
     }
     return colorCode;
-  };
+  }
 
   //////////////////////////////////////////
   // CHECKING USER ANSWER TO CORRECT ANSWER
@@ -233,7 +224,7 @@ $(function() {
     startButton(state);
     $('body').addClass('home').removeClass('active');
     $('.pager, .reset').fadeOut();
-    $('.pager li').removeClass('current, correct, incorrect').html("");
+    $('.pager li').removeClass('current, correct, incorrect').html('');
   }
 
   function startButton(state) {
@@ -245,11 +236,20 @@ $(function() {
     });
   }
 
+  var nextButtonEl;
   function nextButton(state, elements) {
-    $('.next').click(function (event) {
-      event.preventDefault();
-      advance(state);
-    });
+    if (!nextButtonEl) {
+      nextButtonEl = $('.next');
+    }
+
+    if (!nextButtonEl.callbacksAttached) {
+      nextButtonEl.click(function (ev) {
+        ev.preventDefault();
+        advance(state);
+      });
+
+      nextButtonEl.callbacksAttached = true;
+    }
   }
 
   //RESET BUTTON
@@ -260,7 +260,6 @@ $(function() {
     state.lastCorrect = false;
     $('.pager li').removeClass('current').removeClass('correct').removeClass('incorrect');
     setCurrentPage(state, 'pageStart');
-    console.log(state)
   }
 
   $(".reset").click(function(event){
@@ -294,8 +293,18 @@ $(function() {
     }
   }
 
+  //////////////////////////////////////////
+  // EVENT HANDLERS
+  //////////////////////////////////////////
+
+  var SECTION_ELEMENTS = {
+    'pageStart':  $('#page-start'),
+    'pageQuestion':  $('#page-question'),
+    'pageAnswer':  $('#page-answer'),
+    'pageResult':  $('#page-results')
+  }
+
   $(function () {
     renderQuiz(state);
-    console.log("current Question" + state.currentQuestion)
   });
 });

@@ -37,7 +37,7 @@ App.Render = (function($) {
 
     $('h2.question .color span').text(questions.choices[questions.answer]);
 
-    currentProgress(state);
+    App.Pager.render();
     applyColors(state);
   }
 
@@ -48,58 +48,23 @@ App.Render = (function($) {
     }
   }
 
-  function randomPraise () {
+  function randomText () {
     return Math.floor(Math.random() * 8);
   };
 
-  function randomWrong () {
-    return Math.floor(Math.random() * 8);
-  };
-
-  function answerCheck (state){
+  function answerCheck (){
     var state = App.State.get();
     var answer = $('input:checked').parent().parent().index();
     if (answer === state.questions[state.currentQuestion].answer) {
       $('#page-answer h2').text(state.correctEmoji);
-      $('#page-answer h3').text(state.correctText[randomPraise()]);
+      $('#page-answer h3').text(state.correctText[randomText()]);
       App.State.set({lastCorrect: true});
     } else {
       $('#page-answer h2').text(state.wrongEmoji);
-      $('#page-answer h3').text(state.wrongText[randomWrong()]);
+      $('#page-answer h3').text(state.wrongText[randomText()]);
       App.State.set({lastCorrect: false});
     }
   }
-
-  function currentProgress(state) {
-    var currentQuestion = state.currentQuestion;
-    $('.pager li').eq(currentQuestion).addClass('current');
-  }
-
-  function progressCheck(state) {
-    var currentQuestion = state.currentQuestion;
-    $('.pager li').eq(currentQuestion).removeClass('current');
-    if (state.lastCorrect === true) {
-      $('.pager li').eq(currentQuestion).addClass("correct");
-      $('.pager li').eq(currentQuestion).append(progressIcon.replace('@check', 'check'));
-    }
-    else {
-      $('.pager li').eq(currentQuestion).addClass('incorrect');
-      $('.pager li').eq(currentQuestion).append(progressIcon.replace('@check', 'close'));
-    }
-  }
-
-  function applyColors (state) {
-    var choicesHTML = '';
-    var index = 0;
-
-    state.questions[state.currentQuestion].choices.forEach(function () {
-      var choiceHTML = choicesTemplate.replace('@color', state.questions[state.currentQuestion].choices[index]);
-      choicesHTML += choiceHTML;
-      index++;
-    });
-
-    $('.options').html(choicesHTML);
-  };
 
   function resultsPage (state) {
     console.log("I am supposed to render the results page");
@@ -140,6 +105,20 @@ App.Render = (function($) {
         throw new Error('Unexpected page.');
     }
   }
+
+  function applyColors () {
+    var choicesHTML = '';
+    var index = 0;
+    var state = App.State.get();
+
+    state.questions[state.currentQuestion].choices.forEach(function () {
+      var choiceHTML = choicesTemplate.replace('@color', state.questions[state.currentQuestion].choices[index]);
+      choicesHTML += choiceHTML;
+      index++;
+    });
+
+    $('.options').html(choicesHTML);
+  };
 
   $(function () {
     Object.assign(SECTION_ELEMENTS, {

@@ -27,6 +27,7 @@ App.Pager = (function () {
       }
       else if (questionsResults.length) {
         pagerItemClass = questionsResults.shift() ? 'correct' : 'incorrect';
+        // $('.pager li').eq(currentQuestion).append(progressIcon.replace('@check', 'check'));
       }
       else {
         pagerItemClass = '';
@@ -41,4 +42,23 @@ App.Pager = (function () {
   return {
     render: renderPager
   }
-})()
+})();
+
+
+// function currentProgress(state) {
+//   var currentQuestion = state.currentQuestion;
+//   $('.pager li').eq(currentQuestion).addClass('current');
+// }
+//
+// function progressCheck(state) {
+//   var currentQuestion = state.currentQuestion;
+//   $('.pager li').eq(currentQuestion).removeClass('current');
+//   if (state.lastCorrect === true) {
+//     $('.pager li').eq(currentQuestion).addClass("correct");
+//     $('.pager li').eq(currentQuestion).append(progressIcon.replace('@check', 'check'));
+//   }
+//   else {
+//     $('.pager li').eq(currentQuestion).addClass('incorrect');
+//     $('.pager li').eq(currentQuestion).append(progressIcon.replace('@check', 'close'));
+//   }
+// }

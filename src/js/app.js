@@ -2,18 +2,16 @@ $(function() {
   'use strict';
 
 // ADVANCE FROM ANSWERS TO QUESTIONS/RESULTS PAGE
-  function advance(state) {
-    App.State.get();
-    App.State.set({currentQuestion: state.currentQuestion++});
-    console.log(App.State.get())
-    // state.currentQuestion++;
+  function advance() {
+    var state = App.State.get();
+    App.State.set({currentQuestion: state.currentQuestion+1});
     if (state.currentQuestion === state.totalQuestions) {
-      setCurrentPage('pageResult');
+      App.Render.setCurrentPage('pageResult');
     }
     else {
-      setCurrentPage('pageQuestion');
+      App.Render.setCurrentPage('pageQuestion');
     }
-    renderQuiz(state);
+    App.Render.renderQuiz();
   }
 
   //////////////////////////////////////////
@@ -28,9 +26,10 @@ $(function() {
   $('form[name="current-question"]').submit(function (event) {
     event.preventDefault();
     if($('.options--input').hasClass('active')) {
-      // progressCheck(state);
+      App.Pager.render();
       App.Render.answerCheck();
       App.Render.setCurrentPage('pageAnswer');
+      App.Render.renderQuiz();
     }
     else {
       alert("Don't give up now. At least choose your favorite color out of these three!");

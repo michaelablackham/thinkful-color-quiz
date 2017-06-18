@@ -10,10 +10,10 @@ App.Reset = (function($) {
       questions: [],
       score: 0,
       currentQuestion: 0,
-      lastCorrect: false
+      lastCorrect: false,
+      currentPage: 'pageStart'
     });
     $('.pager li').removeClass('current').removeClass('correct').removeClass('incorrect');
-    App.Render.setCurrentPage('pageStart');
   }
 
   return {

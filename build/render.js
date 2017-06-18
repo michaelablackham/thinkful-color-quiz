@@ -16,8 +16,7 @@ App.Render = (function($) {
 
   var progressIcon = '<i class="fa fa-@check" aria-hidden="true"></i>';
 
-  function startPage(state, elements) {
-    startButton(state);
+  function startPage() {
     $('body').addClass('home').removeClass('active');
     $('.pager, .reset').fadeOut();
     $('.pager li').removeClass('current, correct, incorrect').html('');
@@ -47,7 +46,28 @@ App.Render = (function($) {
     if (state.currentQuestion === state.total) {
       $(".next").text("See Final Results");
     }
-    nextButton(state);
+  }
+
+  function randomPraise () {
+    return Math.floor(Math.random() * 8);
+  };
+
+  function randomWrong () {
+    return Math.floor(Math.random() * 8);
+  };
+
+  function answerCheck (state){
+    var state = App.State.get();
+    var answer = $('input:checked').parent().parent().index();
+    if (answer === state.questions[state.currentQuestion].answer) {
+      $('#page-answer h2').text(state.correctEmoji);
+      $('#page-answer h3').text(state.correctText[randomPraise()]);
+      App.State.set({lastCorrect: true});
+    } else {
+      $('#page-answer h2').text(state.wrongEmoji);
+      $('#page-answer h3').text(state.wrongText[randomWrong()]);
+      App.State.set({lastCorrect: false});
+    }
   }
 
   function currentProgress(state) {
@@ -59,7 +79,6 @@ App.Render = (function($) {
     var currentQuestion = state.currentQuestion;
     $('.pager li').eq(currentQuestion).removeClass('current');
     if (state.lastCorrect === true) {
-      // state.score++;
       $('.pager li').eq(currentQuestion).addClass("correct");
       $('.pager li').eq(currentQuestion).append(progressIcon.replace('@check', 'check'));
     }
@@ -72,8 +91,6 @@ App.Render = (function($) {
   function applyColors (state) {
     var choicesHTML = '';
     var index = 0;
-    console.log(state);
-    console.log(state.questions[state.currentQuestion].choices)
 
     state.questions[state.currentQuestion].choices.forEach(function () {
       var choiceHTML = choicesTemplate.replace('@color', state.questions[state.currentQuestion].choices[index]);
@@ -88,19 +105,10 @@ App.Render = (function($) {
     console.log("I am supposed to render the results page");
   }
 
-  function startButton(state) {
-    $('button.start').click(function () {
-      $('body').removeClass('home').addClass('active');
-      setCurrentPage('pageQuestion');
-      renderQuiz(state);
-      $('.pager, .reset').fadeIn();
-    });
-  }
-
   // set the initial currentPage
-    function setCurrentPage(newCurrentPage) {
-      App.State.set({currentPage: newCurrentPage});
-    }
+  function setCurrentPage(newCurrentPage) {
+    App.State.set({currentPage: newCurrentPage});
+  }
 
   function renderQuiz() {
     // Renders the app
@@ -111,8 +119,10 @@ App.Render = (function($) {
       SECTION_ELEMENTS[currentPage].hide();
     });
 
+    // SHOW THE CURRENT PAGE
     SECTION_ELEMENTS[state.currentPage].show();
 
+    //SWITCH TO SHOW THE NEW PAGE and run that pages' function
     switch (state.currentPage) {
       case 'pageStart':
         startPage(state, SECTION_ELEMENTS[state.currentPage]);
@@ -140,5 +150,9 @@ App.Render = (function($) {
     });
   });
 
-  return renderQuiz;
+  return {
+    renderQuiz: renderQuiz,
+    setCurrentPage: setCurrentPage,
+    answerCheck: answerCheck
+  };
 })(jQuery);

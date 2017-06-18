@@ -49,10 +49,19 @@ button {
   button.reset {
     background: rgba(0, 0, 0, 0.3);
     display: none;
-    position: absolute;
+    position: fixed;
     z-index: 3;
     bottom: 50px;
     left: 50px; }
+    button.reset.onPage {
+      display: none; }
+
+.resultsPage button.reset {
+  display: none; }
+
+.resultsPage #page-results button.reset {
+  display: inline-block;
+  position: static; }
 
 header {
   position: relative;
@@ -161,6 +170,9 @@ ul {
       text-align: center;
       top: 10px; }
 
+.resultsPage .pager {
+  display: none; }
+
 h1, h2, h3 {
   text-transform: uppercase;
   letter-spacing: .1em;
@@ -196,7 +208,8 @@ h3 {
   font-weight: 300;
   letter-spacing: 0; }
 
-#page-answer h3 {
+#page-answer h3,
+#page-results h3 {
   display: block;
   font-size: 1.5em;
   font-weight: 300;

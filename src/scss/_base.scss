@@ -68,10 +68,25 @@ button {
   &.reset {
     background: rgba(0,0,0,.3);
     display: none;
-    position: absolute;
+    position: fixed;
     z-index: 3;
     bottom: 50px;
     left: 50px;
+
+    &.onPage {
+      display: none;
+    }
+  }
+}
+
+.resultsPage button.reset {
+  display: none;
+}
+
+.resultsPage #page-results button {
+  &.reset {
+    display: inline-block;
+    position: static;
   }
 }
 
@@ -82,18 +97,6 @@ header {
   transition-duration: .3s;
   transition-property: all;
   transition-timing-function: ease-in-out;
-
-  // &.active {
-  //   margin-top: 0;
-  //
-  //    h1 {
-  //      font-size: 2em;
-  //    }
-  //
-  //   h2 {
-  //     font-size: 1em;
-  //   }
-  // }
 }
 
 section {
@@ -136,12 +139,4 @@ ul {
     margin: 0 3px;
     width: 40px;
   }
-}
-
-.flexbox {
-
-}
-
-.flexbox > span {
-  // width: 50%;
 }

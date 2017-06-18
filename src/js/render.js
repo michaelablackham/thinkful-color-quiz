@@ -14,10 +14,8 @@ App.Render = (function($) {
     '</div>'
   ].join('');
 
-  var progressIcon = '<i class="fa fa-@check" aria-hidden="true"></i>';
-
   function startPage() {
-    $('body').addClass('home').removeClass('active');
+    $('body').addClass('home').removeClass('active resultsPage');
     $('.pager, .reset').fadeOut();
     $('.pager li').removeClass('current, correct, incorrect').html('');
   }
@@ -41,9 +39,12 @@ App.Render = (function($) {
     applyColors(state);
   }
 
-  function answerPage (state) {
+  function answerPage () {
+    var state = App.State.get();
     // Search about Magic Numbers
-    if (state.currentQuestion === state.total) {
+    console.log('is this working')
+    if (state.currentQuestion === state.totalQuestions) {
+      console.log('yes this is wokring')
       $(".next").text("See Final Results");
     }
   }
@@ -56,6 +57,7 @@ App.Render = (function($) {
     var state = App.State.get();
     var answer = $('input:checked').parent().parent().index();
     if (answer === state.questions[state.currentQuestion].answer) {
+      state.score++;
       $('#page-answer h2').text(state.correctEmoji);
       $('#page-answer h3').text(state.correctText[randomText()]);
       App.State.set({lastCorrect: true});
@@ -64,10 +66,30 @@ App.Render = (function($) {
       $('#page-answer h3').text(state.wrongText[randomText()]);
       App.State.set({lastCorrect: false});
     }
+    console.log(state)
   }
 
-  function resultsPage (state) {
-    console.log("I am supposed to render the results page");
+  function resultsPage () {
+    $('body').addClass("resultsPage");
+    $('.pager, #page-reset').hide();
+    finalResults();
+  }
+
+  function finalResults() {
+    var state = App.State.get();
+    var halfTotal = Math.ceil(state.totalQuestions/2);
+    if (state.score < halfTotal) {
+      $('#page-results h2').append(': <span>'+ state.score + '/'+ state.totalQuestions +'</span>');
+      $('h3.result').html(
+        'Yikes, that\'s embarrassing... You may want to practice a bit more.'
+      )
+    }
+    else {
+      $('#page-results h2').append(': <span>'+ state.score + '/'+ state.totalQuestions +'</span>');
+      $('h3.result').html(
+        'I am <em>mildy</em> impressed by you. Can you do it again?'
+      )
+    }
   }
 
   // set the initial currentPage

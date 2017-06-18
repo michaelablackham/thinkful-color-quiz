@@ -44,7 +44,7 @@ $(function() {
     $('body').removeClass('home').addClass('active');
     App.Render.setCurrentPage('pageQuestion');
     App.Render.renderQuiz();
-    $('.pager, .reset').fadeIn();
+    $('.pager, #page-reset').fadeIn();
   });
 
   $(".reset").click(function(event){

@@ -26,17 +26,17 @@ App.Render = (function($) {
   function questionPage (state, element) {
     var state = App.State.get();
 
-    var question = {
+    var questions = {
       choices: App.RandomRGB.choices(),
       answer: App.RandomRGB.correctAnswer()
     }
 
-    state.questions.push(question);
+    state.questions.push(questions);
     App.State.set({questions: state.questions});
 
     state = App.State.get();
 
-    $('h2.question .color span').text(question.choices[question.answer]);
+    $('h2.question .color span').text(questions.choices[questions.answer]);
 
     currentProgress(state);
     applyColors(state);
@@ -72,9 +72,11 @@ App.Render = (function($) {
   function applyColors (state) {
     var choicesHTML = '';
     var index = 0;
+    console.log(state);
+    console.log(state.questions[state.currentQuestion].choices)
 
-    state.question.choices.forEach(function () {
-      var choiceHTML = choicesTemplate.replace('@color', state.question.choices[index]);
+    state.questions[state.currentQuestion].choices.forEach(function () {
+      var choiceHTML = choicesTemplate.replace('@color', state.questions[state.currentQuestion].choices[index]);
       choicesHTML += choiceHTML;
       index++;
     });
@@ -95,7 +97,12 @@ App.Render = (function($) {
     });
   }
 
-  function render() {
+  // set the initial currentPage
+    function setCurrentPage(newCurrentPage) {
+      App.State.set({currentPage: newCurrentPage});
+    }
+
+  function renderQuiz() {
     // Renders the app
     var state = App.State.get();
 
@@ -133,5 +140,5 @@ App.Render = (function($) {
     });
   });
 
-  return render;
+  return renderQuiz;
 })(jQuery);

@@ -60,7 +60,6 @@ button {
   display: none; }
 
 .resultsPage #page-results button.reset {
-  display: inline-block;
   position: static; }
 
 header {

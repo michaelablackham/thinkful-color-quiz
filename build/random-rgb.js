@@ -1,22 +1,15 @@
 var App = App || {}
 
 App.RandomRGB = (function ($) {
-  'use strict'
-
-  function randomRGB () {
-    return {
-      choices: randomChoices(),
-      correctAnswer: randomCorrect()
-    }
-  }
+  'use strict';
 
   // CHOOSE RANDOM CORRECT ANSWER
-  function randomCorrect (state, elements) {
+  function correctAnswer () {
     return Math.floor(Math.random() * 3);
   };
 
   // Generate one random color
-  function randomColor (state) {
+  function randomColor () {
     var colorCode = [];
     for (var i = 0; i < 3; i++) {
       var number = Math.floor(Math.random() * 255);
@@ -26,15 +19,17 @@ App.RandomRGB = (function ($) {
   };
 
   // get three random RGB codes
-  function randomChoices (state) {
-    var colorCode = [];
+  function randomChoices () {
+    var colorCodes = [];
     for (var i = 0; i < 3; i++) {
-      var number = randomColor();
-      colorCode.push(number);
+      colorCodes.push(randomColor());
     }
-    return colorCode;
+    return colorCodes;
   };
 
   // equivalent to `module.exports`
-  return randomRGB
+  return {
+    choices: randomChoices,
+    correctAnswer: correctAnswer
+  }
 })(jQuery)

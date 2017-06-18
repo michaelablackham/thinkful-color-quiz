@@ -1,20 +1,21 @@
 $(function() {
   'use strict';
 
-  //////////////////////////////////////////
-  // Variables
-  //////////////////////////////////////////
+  // App.State.addObserver(App.Hello);
+  // var count = 0;
+  // setInterval(function () {
+  //   count++;
+  //   App.State.set({myCount: count});
+  // }, 1000);
 
-  var choicesTemplate = [
-    '<div class="options--choice">',
-    '<div class="options--input" style="background-color: rgb( @color );">',
-    '<input type="radio" name="input">',
-    '<label>Color @index</label>',
-    '</div>',
-    '</div>'
-  ].join('');
+  setTimeout(function () {
+    var state = App.State.get();
+    App.State.set({currentPage: 'pageQuestion'})
+    App.Render();
+  }, 1);
+  // App.Render();
+  return;
 
-  var progressIcon = '<i class="fa fa-@check" aria-hidden="true"></i>';
 
 // set the initial currentPage
   function setCurrentPage(newCurrentPage) {
@@ -24,7 +25,7 @@ $(function() {
 // ADVANCE FROM ANSWERS TO QUESTIONS/RESULTS PAGE
   function advance(state) {
     state.currentQuestion++;
-    if (state.currentQuestion === 5) {
+    if (state.currentQuestion === state.totalQuestions) {
       setCurrentPage('pageResult');
     }
     else {
@@ -37,32 +38,32 @@ $(function() {
   // CHECKING USER ANSWER TO CORRECT ANSWER
   //////////////////////////////////////////
   // add active class to option item
-  $('.options').on( 'click', 'input', function () {
-    $('.options--input').removeClass('active');
-    $(this).parent().addClass('active');
-  });
-
-  $('form[name="current-question"]').submit(function (event) {
-    event.preventDefault();
-    var answer = $('input:checked').parent().parent().index();
-    if($('.options--input').hasClass('active')) {
-      if (answer === state.question.answer) {
-        $('#page-answer h2').text(state.correctEmoji);
-        $('#page-answer h3').text(state.correctText[randomPraise()]);
-        state.lastCorrect = true;
-      } else {
-        $('#page-answer h2').text(state.wrongEmoji);
-        $('#page-answer h3').text(state.wrongText[randomWrong()]);
-        state.lastCorrect = false;
-      }
-      setCurrentPage('pageAnswer');
-      progressCheck(state);
-      renderQuiz(state);
-    }
-    else {
-      alert("Don't give up now. At least choose your favorite color out of these three!");
-    }
-  });
+  // $('.options').on( 'click', 'input', function () {
+  //   $('.options--input').removeClass('active');
+  //   $(this).parent().addClass('active');
+  // });
+  //
+  // $('form[name="current-question"]').submit(function (event) {
+  //   event.preventDefault();
+  //   var answer = $('input:checked').parent().parent().index();
+  //   if($('.options--input').hasClass('active')) {
+  //     if (answer === state.question.answer) {
+  //       $('#page-answer h2').text(state.correctEmoji);
+  //       $('#page-answer h3').text(state.correctText[randomPraise()]);
+  //       state.lastCorrect = true;
+  //     } else {
+  //       $('#page-answer h2').text(state.wrongEmoji);
+  //       $('#page-answer h3').text(state.wrongText[randomWrong()]);
+  //       state.lastCorrect = false;
+  //     }
+  //     setCurrentPage('pageAnswer');
+  //     progressCheck(state);
+  //     renderQuiz(state);
+  //   }
+  //   else {
+  //     alert("Don't give up now. At least choose your favorite color out of these three!");
+  //   }
+  // });
 
   //////////////////////////////////////////
   // BUTTON CLICKS
@@ -72,15 +73,6 @@ $(function() {
     $('body').addClass('home').removeClass('active');
     $('.pager, .reset').fadeOut();
     $('.pager li').removeClass('current, correct, incorrect').html('');
-  }
-
-  function startButton(state) {
-    $('button.start').click(function () {
-      $('body').removeClass('home').addClass('active');
-      setCurrentPage('pageQuestion');
-      renderQuiz(state);
-      $('.pager, .reset').fadeIn();
-    });
   }
 
   var nextButtonEl;

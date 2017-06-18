@@ -1,5 +1,11 @@
 var App = App || {};
 
+/**
+ * State module
+ *
+ * This is a pretty simple state manager that implements the Observer Pattern.
+ * @see https://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript
+ */
 App.State = (function ($) {
   var state = {
     questions: [],
@@ -32,16 +38,30 @@ App.State = (function ($) {
     totalQuestions: 5
   };
 
+  var observers = []
+
   function getState() {
     return state;
   }
 
   function setState(newState) {
     Object.assign(state, newState);
+    notify(state);
+  }
+
+  function addObserver(observer) {
+    observers.push(observer);
+  }
+
+  function notify(context) {
+    observers.forEach(function (observer) {
+      observer.update(context);
+    });
   }
 
   return {
     get: getState,
-    set: setState
+    set: setState,
+    addObserver: addObserver
   };
 })(jQuery);

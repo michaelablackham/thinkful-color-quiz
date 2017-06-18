@@ -23,19 +23,28 @@ App.Render = (function($) {
     $('.pager li').removeClass('current, correct, incorrect').html('');
   }
 
-  function questionPage (state) {
-    state.question.choices = randomChoices();
-    state.question.answer = randomCorrect();
+  function questionPage (state, element) {
+    var state = App.State.get();
 
-    $('h2.question .color span').text(state.question.choices[state.question.answer]);
+    var question = {
+      choices: App.RandomRGB.choices(),
+      answer: App.RandomRGB.correctAnswer()
+    }
+
+    state.questions.push(question);
+    App.State.set({questions: state.questions});
+
+    state = App.State.get();
+
+    $('h2.question .color span').text(question.choices[question.answer]);
 
     currentProgress(state);
     applyColors(state);
   }
 
   function answerPage (state) {
-    // - [ ] Search about Magic Numbers
-    if (state.currentQuestion === state.totalQuestions) {
+    // Search about Magic Numbers
+    if (state.currentQuestion === state.total) {
       $(".next").text("See Final Results");
     }
     nextButton(state);
@@ -77,6 +86,15 @@ App.Render = (function($) {
     console.log("I am supposed to render the results page");
   }
 
+  function startButton(state) {
+    $('button.start').click(function () {
+      $('body').removeClass('home').addClass('active');
+      setCurrentPage('pageQuestion');
+      renderQuiz(state);
+      $('.pager, .reset').fadeIn();
+    });
+  }
+
   function render() {
     // Renders the app
     var state = App.State.get();
@@ -102,15 +120,16 @@ App.Render = (function($) {
         resultsPage(state, SECTION_ELEMENTS[state.currentPage]);
         break;
       default:
-        throw new Error("Unexpected page.");
+        throw new Error('Unexpected page.');
+    }
   }
 
   $(function () {
     Object.assign(SECTION_ELEMENTS, {
-      pageStart:  $('#page-start'),
-      pageQuestion:  $('#page-question'),
-      pageAnswer:  $('#page-answer'),
-      pageResult:  $('#page-results')
+      pageStart: $('#page-start'),
+      pageQuestion: $('#page-question'),
+      pageAnswer: $('#page-answer'),
+      pageResult: $('#page-results')
     });
   });
 

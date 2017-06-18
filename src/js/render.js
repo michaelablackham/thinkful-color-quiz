@@ -86,6 +86,7 @@ App.Render = (function($) {
       //set state for the last correct answer to work with pager
       App.State.set({lastCorrect: false});
     }
+    App.Pager.render();
   }
 
 //CREATING THE FINAL RESULTS INFORMATION

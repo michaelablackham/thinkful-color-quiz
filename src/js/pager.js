@@ -18,10 +18,13 @@ App.Pager = (function () {
     }
 
     var state = App.State.get();
+    var currentQuestion = state.currentQuestion;
+    $('.pager li').eq(currentQuestion).removeClass('current');
 
     var pagerItemsHTML = '';
     for (var i = 0; i < state.totalQuestions; i++) {
       var pagerItemClass;
+
 
       if (i === state.currentQuestion) {
         pagerItemClass = 'current';
@@ -29,7 +32,7 @@ App.Pager = (function () {
       else if (questionsResults.length) {
         console.log('something is happening')
         pagerItemClass = questionsResults.shift() ? 'correct' : 'incorrect';
-        // $('.pager li').eq(currentQuestion).append(progressIcon.replace('@check', 'check'));
+        $('.pager li').eq(currentQuestion).append(progressIcon.replace('@check', 'check'));
       }
       else {
         pagerItemClass = '';

@@ -93,7 +93,7 @@ App.Render = (function($) {
   function finalResults() {
     var state = App.State.get();
     //add the final score to the title of the page
-    $('#page-results h2 span').text(state.score + '/'+ state.totalQuestions);
+    $('#page-results h2').text(state.score + '/'+ state.totalQuestions);
     //add sad answer to the final results page for a certain amount being wrong
     if (state.score === 0) {
       //text for nothing correct

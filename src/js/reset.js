@@ -14,6 +14,7 @@ App.Reset = (function($) {
       currentPage: 'pageStart'
     });
     $('.pager li').removeClass('current').removeClass('correct').removeClass('incorrect');
+    $(".next").text("Next Question");
   }
 
   return {

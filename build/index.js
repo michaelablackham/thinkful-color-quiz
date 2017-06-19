@@ -25,7 +25,7 @@ $(function() {
   $('form[name="current-question"]').submit(function (event) {
     event.preventDefault();
     if($('.options--input').hasClass('active')) {
-      App.Pager.render();
+      App.Pager.progressCheck();
       App.Render.answerCheck();
       App.Render.setCurrentPage('pageAnswer');
       App.Render.renderQuiz();

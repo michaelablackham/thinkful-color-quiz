@@ -39,7 +39,7 @@ App.Render = (function($) {
 
     $('h2.question .color span').text(questions.choices[questions.answer]);
 
-    App.Pager.render();
+    App.Pager.currentProgress();
     applyColors(state);
   }
 
@@ -81,17 +81,18 @@ App.Render = (function($) {
       //add text and emoji to answr page
       $('#page-answer h2').text(state.correctEmoji);
       $('#page-answer h3').text(state.correctText[randomText()]);
+      state.lastCorrect = true;
 
     } else {
       //add text and emoji to answr page
       $('#page-answer h2').text(state.wrongEmoji);
       $('#page-answer h3').text(state.wrongText[randomText()]);
-
+      state.lastCorrect = false;
     }
 
     App.State.set({questions: newQuestions});
 
-    App.Pager.render();
+    App.Pager.progressCheck();
   }
 
 //CREATING THE FINAL RESULTS INFORMATION

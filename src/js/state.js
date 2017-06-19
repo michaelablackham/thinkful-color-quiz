@@ -34,7 +34,7 @@ App.State = (function ($) {
     score: 0,
     currentQuestion: 0,
     currentPage: 'pageStart',
-    lastCorrect: false,
+    // lastCorrect: false,
     totalQuestions: 5
   };
 

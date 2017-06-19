@@ -71,21 +71,26 @@ App.Render = (function($) {
   function answerCheck (){
     var state = App.State.get();
     var answer = $('input:checked').parent().parent().index();
+
+    var newQuestions = state.questions.slice(0);
+    newQuestions[newQuestions.length - 1].userAnswer = answer;
+
     if (answer === state.questions[state.currentQuestion].answer) {
       //add number to score -- this is shown on final results page
       state.score++;
       //add text and emoji to answr page
       $('#page-answer h2').text(state.correctEmoji);
       $('#page-answer h3').text(state.correctText[randomText()]);
-      //set state for the last correct answer to work with pager
-      App.State.set({lastCorrect: true});
+
     } else {
       //add text and emoji to answr page
       $('#page-answer h2').text(state.wrongEmoji);
       $('#page-answer h3').text(state.wrongText[randomText()]);
-      //set state for the last correct answer to work with pager
-      App.State.set({lastCorrect: false});
+
     }
+
+    App.State.set({questions: newQuestions});
+
     App.Pager.render();
   }
 

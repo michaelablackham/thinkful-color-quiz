@@ -4,7 +4,6 @@ App.Render = (function($) {
   'use strict';
 
   var SECTION_ELEMENTS = {};
-
   var choicesTemplate = [
     '<div class="options--choice">',
     '<div class="options--input" style="background-color: rgb( @color );">',
@@ -13,55 +12,6 @@ App.Render = (function($) {
     '</div>',
     '</div>'
   ].join('');
-
-  function startPage() {
-    //this is what is shown on load.
-    //this also includes actions needed when restarting the entire quiz
-    $('body').addClass('home').removeClass('active resultsPage');
-    $('.pager, .reset').hide();
-    $('.pager li').removeClass('current correct incorrect').html('');
-  }
-
-  function questionPage () {
-    //get the state
-    var state = App.State.get();
-
-    //create a questions variable that takes in other functions for color choices and the correct answer
-    var questions = {
-      choices: App.RandomRGB.choices(),
-      answer: App.RandomRGB.correctAnswer(),
-      isCorrect: false
-    }
-
-    state.questions.push(questions);
-
-    state = App.State.get();
-
-    $('h2.question .color span').text(questions.choices[questions.answer]);
-
-    App.Pager.currentProgress();
-    applyColors(state);
-  }
-
-  function answerPage () {
-    var state = App.State.get();
-    var $nextButton = $(".next");
-    // if the current question is the total question, change text on next button
-    if (state.currentQuestion === state.totalQuestions-1) {
-      $nextButton.text("See Final Results");
-    }
-  }
-
-  function resultsPage () {
-    //show elements that should be seen on the results page
-    $('body').addClass("resultsPage");
-    $('.pager, #page-reset').hide();
-    $('.resultsPage #page-results button.reset').show();
-    //get the final results for the game
-    finalResults();
-  }
-
-//CHECKING ANSWER TO BE RIGHT OR WRONG
 
   //pick a random number to display and item from the praise/terrible praise arrays
   function randomText () {
@@ -118,6 +68,54 @@ App.Render = (function($) {
   // set the initial currentPage
   function setCurrentPage(newCurrentPage) {
     App.State.set({currentPage: newCurrentPage});
+  }
+
+//RENDER VARIOUS PAGES
+  function startPage() {
+    //this is what is shown on load.
+    //this also includes actions needed when restarting the entire quiz
+    $('body').addClass('home').removeClass('active resultsPage');
+    $('.pager, .reset').hide();
+    $('.pager li').removeClass('current correct incorrect').html('');
+  }
+
+  function questionPage () {
+    //get the state
+    var state = App.State.get();
+
+    //create a questions variable that takes in other functions for color choices and the correct answer
+    var questions = {
+      choices: App.RandomRGB.choices(),
+      answer: App.RandomRGB.correctAnswer(),
+      isCorrect: false
+    }
+
+    state.questions.push(questions);
+
+    state = App.State.get();
+
+    $('h2.question .color span').text(questions.choices[questions.answer]);
+
+    App.Pager.currentProgress();
+    applyColors(state);
+  }
+
+  function answerPage () {
+    var state = App.State.get();
+    var $nextButton = $(".next");
+    // if the current question is the total question, change text on next button
+    if (state.currentQuestion === state.totalQuestions-1) {
+      $nextButton.text("See Final Results");
+    }
+  }
+
+  function resultsPage () {
+    //show elements that should be seen on the results page
+    $('body').addClass("resultsPage");
+    $('.pager, #page-reset').hide();
+    $('.resultsPage #page-results button.reset').show();
+    //get the final results for the game
+    finalResults();
   }
 
   function renderQuiz() {

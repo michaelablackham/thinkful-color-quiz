@@ -24,9 +24,9 @@ $(function() {
   //submit the form and redner, check, etc
   $('form[name="current-question"]').submit(function (event) {
     event.preventDefault();
-    if($('.options--input').hasClass('active')) {
-      App.Pager.progressCheck();
+    if ($('.options--input').hasClass('active')) {
       App.Render.answerCheck();
+      App.Pager.progressCheck();
       App.Render.setCurrentPage('pageAnswer');
       App.Render.renderQuiz();
     }

@@ -29,11 +29,11 @@ App.Render = (function($) {
     //create a questions variable that takes in other functions for color choices and the correct answer
     var questions = {
       choices: App.RandomRGB.choices(),
-      answer: App.RandomRGB.correctAnswer()
+      answer: App.RandomRGB.correctAnswer(),
+      isCorrect: false
     }
 
     state.questions.push(questions);
-    // App.State.set({questions: state.questions});
 
     state = App.State.get();
 
@@ -45,9 +45,10 @@ App.Render = (function($) {
 
   function answerPage () {
     var state = App.State.get();
+    var $nextButton = $(".next");
     // if the current question is the total question, change text on next button
     if (state.currentQuestion === state.totalQuestions-1) {
-      $(".next").text("See Final Results");
+      $nextButton.text("See Final Results");
     }
   }
 
@@ -71,51 +72,46 @@ App.Render = (function($) {
   function answerCheck (){
     var state = App.State.get();
     var answer = $('input:checked').parent().parent().index();
-
-    var newQuestions = state.questions.slice(0);
-    newQuestions[newQuestions.length - 1].userAnswer = answer;
+    var $answerH2 = $('#page-answer h2');
+    var $answerH3 = $('#page-answer h3');
 
     if (answer === state.questions[state.currentQuestion].answer) {
       //add number to score -- this is shown on final results page
       state.score++;
       //add text and emoji to answr page
-      $('#page-answer h2').text(state.correctEmoji);
-      $('#page-answer h3').text(state.correctText[randomText()]);
+      $answerH2.text(state.correctEmoji);
+      $answerH3.text(state.correctText[randomText()]);
       state.lastCorrect = true;
-
     } else {
       //add text and emoji to answr page
-      $('#page-answer h2').text(state.wrongEmoji);
-      $('#page-answer h3').text(state.wrongText[randomText()]);
+      $answerH2.text(state.wrongEmoji);
+      $answerH3.text(state.wrongText[randomText()]);
       state.lastCorrect = false;
     }
-
-    App.State.set({questions: newQuestions});
-
-    App.Pager.progressCheck();
   }
 
 //CREATING THE FINAL RESULTS INFORMATION
   function finalResults() {
     var state = App.State.get();
+    var $resultH3 = $('h3.result');
     //add the final score to the title of the page
     $('#page-results h2').text(state.score + '/'+ state.totalQuestions);
     //add sad answer to the final results page for a certain amount being wrong
     if (state.score === 0) {
       //text for nothing correct
-      $('h3.result').html('I think I\'ll pretend like I didn\'t see anything here..')
+      $resultH3.html('I think I\'ll pretend like I didn\'t see anything here..')
     }
     else if (state.score === state.totalQuestions) {
       // text for a perfect score
-      $('h3.result').html('Woah. Okay. I tip my hat to you sir.');
+      $resultH3.html('Woah. Okay. I tip my hat to you sir.');
     }
     else if (state.score < Math.ceil(state.totalQuestions/2) && state.score > 0) {
       //text for less than half correct but more than 0
-      $('h3.result').html('Yikes, that\'s embarrassing... You may want to practice a bit more.');
+      $resultH3.html('Yikes, that\'s embarrassing... You may want to practice a bit more.');
     }
     else {
       //text for more than half being correct but not a perfect score
-      $('h3.result').html('I am <em>mildy</em> impressed by you. Can you do it again?');
+      $resultH3.html('I am <em>mildy</em> impressed by you. Can you do it again?');
     }
   }
 

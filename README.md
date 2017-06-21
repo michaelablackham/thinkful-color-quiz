@@ -23,11 +23,11 @@
 
 ## Tasks
 
-- [ ] render application
+- [x] render application
   - [x] create a function that says which section we are currently on
   - [x] set the current page to start (on load)
   - [x] this is based off of the currentPage object that gets assigned depending on which number we are on
-  - [ ] call a function for what happens on each page depending on the currentPage object
+  - [x] call a function for what happens on each page depending on the currentPage object
 - [x] start Quiz
   - [x] background color change
   - [x] pulsing button
@@ -49,15 +49,17 @@
   - [x] add right or wrong styling to pager
   - [x] keep track of right/wrong answers
   - [x] add "current" class to the current number pager that correlates to current question
-- [ ] advance to new question
-  - [ ] if questionCount !== 5
-  - [ ] add ++ to questionCount
+- [x] advance to new question
+  - [x] if questionCount !== 5
+  - [x] add ++ to questionCount
   - [x] add right or wrong to pager
-- [ ] final result page
-  - [ ] appears after question count === 5
-  - [ ] shows number right vs wrongText
+- [x] final result page
+  - [x] appears after question count === 5
+  - [x] shows number right vs wrongText
 - [x] restart
   - [x] click on "start over" and go back to home and set all state objects back to defaults
   - [x] hide start over button
   - [x] hide and reset pager
   - [x] header/title on load
+- [ ] Clean up all
+  - [ ] break up everything into modules

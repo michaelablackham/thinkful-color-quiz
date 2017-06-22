@@ -1,18 +1,6 @@
 var gulp = require('gulp')
 var sass = require('gulp-sass')
-// var concat = require('gulp-concat')
-
-// - [x] gulp.task
-// - [x] gulp.src
-// - [x] gulp.dest
-// - [x] gulp.watch
-
-// var conf = {
-//   html: {
-//     src: './src/html/*.html',
-//     dest: './build'
-//   }
-// }
+var concat = require('gulp-concat')
 
 gulp.task('build', ['build:html', 'build:css', 'build:js']);
 
@@ -29,6 +17,7 @@ gulp.task('build:css', function () {
 
 gulp.task('build:js', function () {
   gulp.src('./src/js/*.js')
+    .pipe(concat('build.js'))
     .pipe(gulp.dest('./build'))
 })
 

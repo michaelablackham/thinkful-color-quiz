@@ -13,9 +13,16 @@ App.Reset = (function($) {
       lastCorrect: false,
       currentPage: 'pageStart'
     });
-    $('.pager li').removeClass('current').removeClass('correct').removeClass('incorrect');
+    $('.pager li').removeClass('current correct incorrect');
     $(".next").text("Next Question");
   }
+
+  // Button Click
+  $(".reset").click(function(ev){
+    ev.preventDefault();
+    App.Reset.reset();
+    App.Render.renderQuiz();
+  });
 
   return {
     reset: resetGame

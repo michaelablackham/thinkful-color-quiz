@@ -12,19 +12,19 @@ App.Results = (function($) {
       //add sad answer to the final results page for a certain amount being wrong
       if (state.score === 0) {
         //text for nothing correct
-        $resultH3.html(state.finalResults.terrible)
+        $resultH3.html(state.finalResults[0].terrible);
       }
       else if (state.score === state.totalQuestions) {
         // text for a perfect score
-        $resultH3.html(state.finalResults.perfect);
+        $resultH3.html(state.finalResults[3].perfect);
       }
       else if (state.score < Math.ceil(state.totalQuestions/2) && state.score > 0) {
         //text for less than half correct but more than 0
-        $resultH3.html(state.finalResults.okay);
+        $resultH3.html(state.finalResults[1].okay);
       }
       else {
         //text for more than half being correct but not a perfect score
-        $resultH3.html(state.finalResults.good);
+        $resultH3.html(state.finalResults[2].good);
       }
     }
 

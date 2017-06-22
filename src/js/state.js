@@ -33,18 +33,10 @@ App.State = (function ($) {
     ],
     score: 0,
     finalResults: [
-      {
-        terrible: 'I think I\'ll pretend like I didn\'t see anything here..'
-      },
-      {
-        okay: 'Yikes, that\'s embarrassing... You may want to practice a bit more.'
-      },
-      {
-        good: 'I am <em>mildy</em> impressed by you. Can you do it again?'
-      },
-      {
-        perfect: 'Woah. Okay. I tip my hat to you sir.'
-      },
+      {terrible: 'I think I\'ll pretend like I didn\'t see anything here..'},
+      {okay: 'Yikes, that\'s embarrassing... You may want to practice a bit more.'},
+      {good: 'I am <em>mildy</em> impressed by you. Can you do it again?'},
+      {perfect: 'Woah. Okay. I tip my hat to you sir.'},
     ],
     currentQuestion: 0,
     currentPage: 'pageStart',

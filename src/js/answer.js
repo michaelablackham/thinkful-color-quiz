@@ -28,8 +28,6 @@ App.Answer = (function($) {
       $answerH3.text(state.wrongText[randomText()]);
       state.lastCorrect = false;
     }
-
-    console.log(state)
   }
 
   // Render Answer Page

@@ -61,5 +61,5 @@
   - [x] hide start over button
   - [x] hide and reset pager
   - [x] header/title on load
-- [ ] Clean up all
-  - [ ] break up everything into modules
+- [x] Clean up all
+  - [x] break up everything into modules

@@ -63,3 +63,4 @@
   - [x] header/title on load
 - [x] Clean up all
   - [x] break up everything into modules
+- [x] upload to thinkful

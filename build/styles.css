@@ -58,7 +58,12 @@ button {
     position: fixed;
     z-index: 3;
     bottom: 50px;
-    left: 50px; }
+    left: 50%;
+    margin-left: -95px; }
+    @media (min-width: 700px) {
+      button.reset {
+        left: 50px;
+        margin-left: 0; } }
     button.reset.onPage {
       display: none; }
 
@@ -103,14 +108,21 @@ ul {
   ul li {
     border-radius: 100%;
     display: inline-block;
-    height: 40px;
+    height: 30px;
     margin: 0 3px;
-    width: 40px; }
+    width: 30px; }
+    @media (min-width: 460px) {
+      ul li {
+        height: 40px;
+        width: 40px; } }
 
 .options {
-  margin: 2em 0;
+  margin: 1em 0;
   text-align: center; }
   @media (min-width: 460px) {
+    .options {
+      margin: 2em 0; } }
+  @media (min-width: 600px) {
     .options {
       margin: 3em 0; } }
   .options .options--choice {
@@ -153,9 +165,20 @@ ul {
 .pager {
   display: none;
   position: fixed;
-  bottom: 50px;
-  right: 50px;
-  z-index: 3; }
+  bottom: 130px;
+  right: 0;
+  width: 100%;
+  z-index: 3;
+  text-align: center; }
+  @media (min-width: 700px) {
+    .pager {
+      bottom: 50px;
+      right: 50px;
+      width: auto; } }
+  @media (max-width: 700px) {
+    .pager h3 {
+      margin-left: 0;
+      font-size: 1em; } }
   .pager ul {
     display: inline-block; }
   .pager li {
@@ -176,7 +199,10 @@ ul {
       left: 0;
       width: 100%;
       text-align: center;
-      top: 10px; }
+      top: 5px; }
+      @media (min-width: 460px) {
+        .pager li .fa {
+          top: 10px; } }
 
 .resultsPage .pager {
   display: none; }
@@ -239,18 +265,32 @@ h3 {
 
 #page-answer h2,
 #page-results h2 {
-  font-size: 5em;
+  font-size: 2em;
   font-weight: 300;
   letter-spacing: 0; }
+  @media (min-width: 460px) {
+    #page-answer h2,
+    #page-results h2 {
+      font-size: 3.5em; } }
+  @media (min-width: 600px) {
+    #page-answer h2,
+    #page-results h2 {
+      font-size: 5em; } }
 
 #page-answer h3,
 #page-results h3 {
   display: block;
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: 300;
   letter-spacing: .05em;
   margin-bottom: 1em;
-  text-transform: none; }
+  text-transform: none;
+  padding-left: 20px;
+  padding-right: 20px; }
+  @media (min-width: 460px) {
+    #page-answer h3,
+    #page-results h3 {
+      font-size: 1.5em; } }
 
 @keyframes colorchange {
   0% {

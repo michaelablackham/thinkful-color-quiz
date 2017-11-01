@@ -1,9 +1,24 @@
 .pager {
   display: none;
   position: fixed;
-  bottom: 50px;
-  right: 50px;
+  bottom: 130px;
+  right: 0;
+  width: 100%;
   z-index: 3;
+  text-align: center;
+
+  @media (min-width: 700px) {
+    bottom: 50px;
+    right: 50px;
+    width: auto;
+  }
+
+  h3 {
+    @media (max-width: 700px) {
+      margin-left: 0;
+      font-size: 1em;
+    }
+  }
 
   ul {
     display: inline-block;
@@ -33,7 +48,11 @@
       left: 0;
       width: 100%;
       text-align: center;
-      top: 10px;
+      top: 5px;
+
+      @media (min-width: 460px) {
+        top: 10px;
+      }
     }
   }
 }

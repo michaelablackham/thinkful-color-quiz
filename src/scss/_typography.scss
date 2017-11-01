@@ -70,17 +70,30 @@ h3 {
 #page-answer,
 #page-results {
   h2 {
-    font-size: 5em;
+    font-size: 2em;
     font-weight: 300;
     letter-spacing: 0;
+
+    @media (min-width: 460px) {
+      font-size: 3.5em;
+    }
+    @media (min-width: 600px) {
+      font-size: 5em;
+    }
   }
 
   h3 {
     display: block;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: 300;
     letter-spacing: .05em;
     margin-bottom: 1em;
     text-transform: none;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    @media (min-width: 460px) {
+      font-size: 1.5em;
+    }
   }
 }

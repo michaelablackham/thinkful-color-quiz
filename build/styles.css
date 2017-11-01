@@ -65,7 +65,8 @@ button {
         left: 50px;
         margin-left: 0; } }
     button.reset.onPage {
-      display: none; }
+      display: none;
+      margin-left: 0; }
 
 .resultsPage button.reset {
   display: none; }

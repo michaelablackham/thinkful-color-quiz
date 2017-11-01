@@ -1,6 +1,10 @@
 .options {
-  margin: 3em 0;
+  margin: 2em 0;
   text-align: center;
+
+  @media (min-width: 460px) {
+    margin: 3em 0;
+  }
 
   .options--choice {
     display: inline-block;

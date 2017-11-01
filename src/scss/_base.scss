@@ -18,11 +18,17 @@ body {
       margin-top: 0;
 
        h1 {
-         font-size: 2em;
+         font-size: 1.5em;
+         @media (min-width: 460px) {
+           font-size: 2em;
+         }
        }
 
       h2 {
-        font-size: 1em;
+        font-size: .8em;
+        @media (min-width: 460px) {
+          font-size: 1em;
+        }
       }
     }
   }

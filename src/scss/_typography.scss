@@ -12,17 +12,47 @@ h1, h2 {
 }
 
 h1 {
-  font-size: 4em;
+  font-size: 2em;
   margin-bottom: .4em;
+
+  @media (min-width: 460px) {
+    font-size: 3em;
+  }
+  @media (min-width: 600px) {
+    font-size: 4em;
+  }
 }
 
 h2 {
   font-size: 2em;
 
   &.subtitle {
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: normal;
     opacity: .5;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    @media (min-width: 460px) {
+      padding-left: 30px;
+      padding-right: 30px;
+      font-size: 3em;
+      font-size: 1.5em;
+    }
+  }
+  &.question {
+    font-size: 1.4em;
+    padding-left: 20px;
+    padding-right: 20px;
+    @media (min-width: 460px) {
+      font-size: 2em;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+    @media (min-width: 600px) {
+      font-size: 3em;
+    }
+
   }
 
   > span {
